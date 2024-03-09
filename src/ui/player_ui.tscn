@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc7rs5v237ud7"]
+
+[ext_resource type="Script" path="res://src/ui/stamina_bar.gd" id="1_vgvyo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qdm2x"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_detail = 1
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5m4h2"]
+bg_color = Color(1, 1, 1, 1)
+corner_detail = 1
+
+[node name="PlayerUi" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StaminaBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.899
+anchor_right = 0.8
+anchor_bottom = 0.9
+offset_top = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_qdm2x")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5m4h2")
+step = 0.001
+value = 50.0
+show_percentage = false
+script = ExtResource("1_vgvyo")
+
+[node name="LowBoundIndicator" type="ColorRect" parent="StaminaBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_right = 0.2
+anchor_bottom = 1.0
+offset_left = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

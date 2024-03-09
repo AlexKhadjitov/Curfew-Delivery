@@ -7,6 +7,8 @@ enum State {
 	Crouching
 }
 
+@onready var collision_shape: CollisionShape3D = $"CollisionShape3D"
+
 @export_group("Speeds")
 @export var walking_speed: float
 @export var w_jump_velocity: float
@@ -34,12 +36,14 @@ func _physics_process(delta):
 
 	#Determine state
 	stamina = clampf(stamina, 0, max_stamina)
-	#print(stamina)
-	if Input.is_action_pressed("run") and stamina >= 1:
+	if Input.is_action_pressed("run") and stamina > 0:
 		state = State.Running
+	elif Input.is_action_pressed("crouch"):
+		state = State.Crouching
 	else:
 		state = State.Walking
-
+	
+	#Do state stuff
 	if state == State.Walking:
 		speed = walking_speed
 		jump_velocity = w_jump_velocity
@@ -49,7 +53,7 @@ func _physics_process(delta):
 		jump_velocity = r_jump_velocity
 
 		stamina -= stamina_decrease * delta
-		if stamina <=0:
+		if stamina <= 0:
 			state = State.Walking
 	else:
 		if stamina > stamina_low_bound:
@@ -59,6 +63,9 @@ func _physics_process(delta):
 
 	if state == State.Crouching:
 		speed = crouching_speed
+		collision_shape.shape.height = 1
+	else:
+		collision_shape.shape.height = 1.8
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
