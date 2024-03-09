@@ -7,27 +7,44 @@ enum State {
 	Crouching
 }
 
-@onready var camera: Camera3D = $"Camera3D"
+@export var walking_speed: float
+@export var w_jump_velocity: float
+@export var running_speed: float
+@export var r_jump_velocity: float
+@export var crouching_speed: float
 
 var state: State = State.Walking
 
-var speed = 5
-var jump_velocity = 5
-
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var speed
+var jump_velocity
+var gravity = 12
 
 
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor(): # Add the gravity.
 		velocity.y -= gravity * delta
+
+	#Determine state
+	if Input.is_action_pressed("run"):
+		state = State.Running
+	else:
+		state = State.Walking
+
+	#Set speeds according to state
+	if state == State.Walking:
+		speed = walking_speed
+		jump_velocity = w_jump_velocity
+	if state == State.Running:
+		speed = running_speed
+		jump_velocity = r_jump_velocity
+	if state == State.Crouching:
+		speed = crouching_speed
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 
 	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
