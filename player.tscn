@@ -16,6 +16,10 @@ w_jump_velocity = 4.5
 running_speed = 7.5
 r_jump_velocity = 6.75
 crouching_speed = 3.0
+stamina_decrease = 10.0
+stamina_increase = 6.0
+stamina_low_increase = 2.0
+stamina_low_bound = 20.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)

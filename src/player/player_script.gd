@@ -7,11 +7,18 @@ enum State {
 	Crouching
 }
 
+@export_group("Speeds")
 @export var walking_speed: float
 @export var w_jump_velocity: float
 @export var running_speed: float
 @export var r_jump_velocity: float
 @export var crouching_speed: float
+@export_group("Stamina")
+@export var max_stamina: float = 100
+@export var stamina_decrease: float
+@export var stamina_increase: float
+@export var stamina_low_increase: float
+@export var stamina_low_bound: float
 
 var state: State = State.Walking
 
@@ -19,24 +26,37 @@ var speed
 var jump_velocity
 var gravity = 12
 
+var stamina = 100
 
 func _physics_process(delta):
 	if not is_on_floor(): # Add the gravity.
 		velocity.y -= gravity * delta
 
 	#Determine state
-	if Input.is_action_pressed("run"):
+	stamina = clampf(stamina, 0, max_stamina)
+	#print(stamina)
+	if Input.is_action_pressed("run") and stamina >= 1:
 		state = State.Running
 	else:
 		state = State.Walking
 
-	#Set speeds according to state
 	if state == State.Walking:
 		speed = walking_speed
 		jump_velocity = w_jump_velocity
+
 	if state == State.Running:
 		speed = running_speed
 		jump_velocity = r_jump_velocity
+
+		stamina -= stamina_decrease * delta
+		if stamina <=0:
+			state = State.Walking
+	else:
+		if stamina > stamina_low_bound:
+			stamina += stamina_increase * delta
+		else:
+			stamina += stamina_low_increase * delta
+
 	if state == State.Crouching:
 		speed = crouching_speed
 

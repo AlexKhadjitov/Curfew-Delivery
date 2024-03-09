@@ -15,12 +15,6 @@ func _process(delta):
 	rotation_degrees.x = look_rot.x
 	player.rotation_degrees.y = look_rot.y
 
-	#if Input.is_action_just_pressed("escape"):
-	#	if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-	#		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	#	else:
-	#		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
 func _input(event):
 	if event is InputEventMouseMotion:
 		look_rot.y -= (event.relative.x * sensivity/20)
