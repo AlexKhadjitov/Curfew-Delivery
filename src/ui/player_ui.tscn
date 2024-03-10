@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bc7rs5v237ud7"]
+[gd_scene load_steps=6 format=3 uid="uid://bc7rs5v237ud7"]
 
+[ext_resource type="Script" path="res://src/ui/player_ui.gd" id="1_ksw1e"]
 [ext_resource type="Script" path="res://src/ui/stamina_bar.gd" id="1_vgvyo"]
+[ext_resource type="Texture2D" uid="uid://br1sygra7qyms" path="res://textures/ui/crosshair.png" id="2_vch4s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qdm2x"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -20,13 +22,14 @@ anti_aliasing = false
 bg_color = Color(1, 1, 1, 1)
 corner_detail = 1
 
-[node name="PlayerUi" type="Control"]
+[node name="PlayerUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ksw1e")
 
 [node name="StaminaBar" type="ProgressBar" parent="."]
 layout_mode = 1
@@ -55,3 +58,19 @@ offset_left = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="Crosshair" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vch4s")

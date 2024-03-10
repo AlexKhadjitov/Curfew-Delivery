@@ -1,0 +1,64 @@
+[gd_resource type="StandardMaterial3D" load_steps=11 format=3 uid="uid://cfgo14n0x0i6g"]
+
+[ext_resource type="Texture2D" uid="uid://dbg8qtknejt0b" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Stone/Stone_16-128x128.png" id="1_dsg5b"]
+
+[sub_resource type="Gradient" id="Gradient_a3sav"]
+offsets = PackedFloat32Array(0.0510949, 0.361314)
+colors = PackedColorArray(0, 0, 0, 1, 0.168627, 0.172549, 0.196078, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bw8fo"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_obso3"]
+width = 256
+height = 256
+seamless = true
+color_ramp = SubResource("Gradient_a3sav")
+noise = SubResource("FastNoiseLite_bw8fo")
+
+[sub_resource type="Gradient" id="Gradient_7deo1"]
+offsets = PackedFloat32Array(0, 0.357143)
+colors = PackedColorArray(0, 0, 0, 0.145098, 1, 1, 1, 0)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tu5p8"]
+frequency = 0.0135
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k43ej"]
+width = 256
+height = 256
+seamless = true
+color_ramp = SubResource("Gradient_7deo1")
+noise = SubResource("FastNoiseLite_tu5p8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mar8s"]
+transparency = 1
+albedo_texture = SubResource("NoiseTexture2D_k43ej")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oblbq"]
+width = 256
+height = 256
+seamless = true
+color_ramp = SubResource("Gradient_a3sav")
+noise = SubResource("FastNoiseLite_bw8fo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hjyu"]
+next_pass = SubResource("StandardMaterial3D_mar8s")
+transparency = 1
+albedo_texture = SubResource("NoiseTexture2D_obso3")
+roughness = 0.52
+roughness_texture = SubResource("NoiseTexture2D_oblbq")
+uv1_scale = Vector3(0.11, 0.11, 0.11)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[resource]
+next_pass = SubResource("StandardMaterial3D_8hjyu")
+albedo_color = Color(0.309804, 0.317647, 0.368627, 1)
+albedo_texture = ExtResource("1_dsg5b")
+uv1_scale = Vector3(0.69, 0.69, 0.69)
+uv1_triplanar = true
+texture_filter = 0

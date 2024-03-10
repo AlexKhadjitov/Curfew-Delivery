@@ -81,4 +81,15 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 
+	#apply forces to kinematic bodies
+	#var collision: KinematicCollision3D = get_last_slide_collision()
+	#if collision != null and collision.get_collider() is RigidBody3D:
+	#	print(collision.get_collider())
+	#	collision.get_collider().linear_velocity += velocity / 2
+	#	var a = global_position - collision.get_collider().global_position
+	#	a = a.normalized()
+	#	print(a.dot(velocity.normalized()))
+
+
 	move_and_slide()
+

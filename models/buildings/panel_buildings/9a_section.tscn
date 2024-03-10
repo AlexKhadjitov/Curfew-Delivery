@@ -1,0 +1,71 @@
+[gd_scene load_steps=14 format=3 uid="uid://blhsdt7p77ph7"]
+
+[ext_resource type="Shader" path="res://materials/panel_building.gdshader" id="1_lfiyr"]
+[ext_resource type="Texture2D" uid="uid://bcl04q775yd8v" path="res://textures/panel_buildings/panel_a_wall.png" id="2_oll64"]
+[ext_resource type="Texture2D" uid="uid://ct02xtdielmxf" path="res://textures/panel_buildings/building_under.png" id="3_b80dm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vofw7"]
+size = Vector3(21, 27, 12)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f1bav"]
+
+[sub_resource type="Gradient" id="Gradient_f4cp3"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_td814"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ma06n"]
+width = 128
+height = 128
+color_ramp = SubResource("Gradient_f4cp3")
+noise = SubResource("FastNoiseLite_td814")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_55iiu"]
+render_priority = 0
+shader = ExtResource("1_lfiyr")
+shader_parameter/x_panels = 7.0
+shader_parameter/y_panels = 9.0
+shader_parameter/texture_x_variations = 7.0
+shader_parameter/texture_y_variations = 4.0
+shader_parameter/wall_texture = ExtResource("2_oll64")
+shader_parameter/rand = SubResource("NoiseTexture2D_ma06n")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hhxxd"]
+size = Vector2(21, 27)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pc2q2"]
+albedo_texture = ExtResource("3_b80dm")
+uv1_scale = Vector3(0.415, 1, 1)
+uv1_offset = Vector3(-0.015, 0, 0)
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_rceyx"]
+material = SubResource("StandardMaterial3D_pc2q2")
+size = Vector3(21, 1, 12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6kc1m"]
+size = Vector3(6, 0.2, 4)
+
+[node name="9aSection" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.5, 0)
+shape = SubResource("BoxShape3D_vofw7")
+
+[node name="FrontWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 14.5, 6)
+material_override = SubResource("ShaderMaterial_f1bav")
+material_overlay = SubResource("ShaderMaterial_55iiu")
+mesh = SubResource("PlaneMesh_hhxxd")
+
+[node name="Underside" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_rceyx")
+
+[node name="Entrance" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Entrance"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.1, 2)
+mesh = SubResource("BoxMesh_6kc1m")

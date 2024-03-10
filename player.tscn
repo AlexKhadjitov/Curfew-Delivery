@@ -1,16 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bnca6dhckltj0"]
+[gd_scene load_steps=9 format=3 uid="uid://bnca6dhckltj0"]
 
 [ext_resource type="Script" path="res://src/player/player_script.gd" id="1_qdpk6"]
 [ext_resource type="Script" path="res://src/player/camera_controller.gd" id="2_w5qhm"]
 [ext_resource type="Script" path="res://src/player/interactor.gd" id="3_dnpoy"]
 [ext_resource type="PackedScene" uid="uid://bc7rs5v237ud7" path="res://src/ui/player_ui.tscn" id="3_hunnx"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x5ryj"]
-no_depth_test = true
-
-[sub_resource type="SphereMesh" id="SphereMesh_nt4vt"]
-radius = 0.05
-height = 0.1
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_arb3b"]
 height = 1.8
@@ -57,10 +50,6 @@ script = ExtResource("3_dnpoy")
 [node name="GrabPoint" type="Node3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.285)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D/GrabPoint"]
-material_override = SubResource("StandardMaterial3D_x5ryj")
-mesh = SubResource("SphereMesh_nt4vt")
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 cast_shadow = 0
@@ -77,4 +66,4 @@ texture_albedo = SubResource("GradientTexture2D_ker60")
 upper_fade = 3.41685e-05
 lower_fade = 1.12715e-05
 
-[node name="PlayerUi" parent="." instance=ExtResource("3_hunnx")]
+[node name="PlayerUI" parent="." instance=ExtResource("3_hunnx")]
