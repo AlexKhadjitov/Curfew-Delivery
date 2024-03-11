@@ -63,9 +63,9 @@ func _physics_process(delta):
 
 	if state == State.Crouching:
 		speed = crouching_speed
-		collision_shape.shape.height = 1
+		collision_shape.shape.height = move_toward(collision_shape.shape.height, 1, delta*5)
 	else:
-		collision_shape.shape.height = 1.8
+		collision_shape.shape.height = move_toward(collision_shape.shape.height, 1.8, delta*5)
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():

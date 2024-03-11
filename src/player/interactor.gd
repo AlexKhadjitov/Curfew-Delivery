@@ -38,6 +38,7 @@ func grab_start(object):
 
 	grabbed_obj.gravity_scale = 0
 	grabbed_obj.linear_velocity = Vector3.ZERO
+	grabbed_obj.angular_velocity = Vector3.ZERO
 	grabbed_obj.add_collision_exception_with(player)
 	
 	grab_point.position.z = -1 * camera.global_position.distance_to(grabbed_obj.global_position)

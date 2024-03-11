@@ -30,10 +30,11 @@ void fragment() {
 		uv.y /= texture_y_variations;
 	
 		//randomize vertical
-		/*vec2 rand_coord = panel_coord;
+		vec2 rand_coord = panel_coord;
 		rand_coord.x /= x_panels;
 		rand_coord.y /= y_panels;
-		uv.y += ceil(texture(rand, panel_coord/7.).r*100.) * 1./texture_y_variations;*/
+		float world_pos_offset = NODE_POSITION_WORLD.x + NODE_POSITION_WORLD.z;
+		uv.y += ceil(texture(rand, panel_coord/7.).r*100. + world_pos_offset) * 1./texture_y_variations;
 		
 		ALBEDO.rgb = texture(wall_texture, uv).rgb;
 	}
