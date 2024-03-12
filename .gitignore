@@ -3,3 +3,5 @@
 exports/
 export_presets.cfg
 textures/
+*.rar
+*.zip

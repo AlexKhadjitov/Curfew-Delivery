@@ -1,11 +1,22 @@
-[gd_scene load_steps=23 format=3 uid="uid://nkflkqse5nef"]
+[gd_scene load_steps=40 format=3 uid="uid://nkflkqse5nef"]
 
 [ext_resource type="Texture2D" uid="uid://e6sjtuu6wg1x" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Stone/Stone_06-128x128.png" id="1_844k1"]
-[ext_resource type="Texture2D" uid="uid://bps22bcbp2stg" path="res://textures/wall hangers/kover1.png" id="2_c1bvm"]
 [ext_resource type="Material" uid="uid://dg26602hdlop7" path="res://materials/basement_wall.tres" id="2_o0geh"]
 [ext_resource type="Texture2D" uid="uid://qqhqxo3r0sdc" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Stone/Stone_22-128x128.png" id="4_t3gu1"]
 [ext_resource type="Texture2D" uid="uid://qexobxpkoq0g" path="res://textures/wall hangers/kover2.png" id="5_xt4i8"]
+[ext_resource type="Texture2D" uid="uid://dffeb33du4ct8" path="res://textures/SBS - Tiny Texture Pack 2 - 128x128/128x128/Wood/Wood_04-128x128.png" id="6_ojcli"]
 [ext_resource type="Texture2D" uid="uid://dwqbn5d5o3y45" path="res://textures/SBS - Tiny Texture Pack - 128x128/128x128/Wood/Wood_08-128x128.png" id="6_rts6d"]
+[ext_resource type="Texture2D" uid="uid://b2yir7jskntvh" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Cloth/Cloth_02-128x128.png" id="6_tv5g1"]
+[ext_resource type="Texture2D" uid="uid://b82waj3le564" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Stone/Stone_05-128x128.png" id="7_ungm2"]
+[ext_resource type="Script" path="res://src/delivery_basement/employer_eyes.gd" id="9_5x3ww"]
+[ext_resource type="PackedScene" uid="uid://bnca6dhckltj0" path="res://player.tscn" id="9_l6xuo"]
+[ext_resource type="Texture2D" uid="uid://dac4di5pjil6e" path="res://textures/delivery_basement/employer_eyes.png" id="10_4yhog"]
+[ext_resource type="Script" path="res://src/delivery_basement/employer.gd" id="10_rwf3u"]
+[ext_resource type="AudioStream" uid="uid://do1hwj33lhyna" path="res://audio/voices/employer_voice.wav" id="13_ps3w3"]
+
+[sub_resource type="Environment" id="Environment_bxgc7"]
+background_energy_multiplier = 0.03
+ssao_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m6pet"]
 size = Vector3(10, 1, 14)
@@ -47,13 +58,46 @@ size = Vector2(7, 14)
 [sub_resource type="BoxShape3D" id="BoxShape3D_se5i2"]
 size = Vector3(1.5, 0.66, 3)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uijxx"]
+albedo_texture = ExtResource("6_tv5g1")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+
 [sub_resource type="BoxMesh" id="BoxMesh_xhpnc"]
 size = Vector3(1.5, 0.66, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bnq5a"]
+size = Vector3(1.5, 0.66, 3)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1lr8h"]
+albedo_texture = ExtResource("6_ojcli")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_w1e5l"]
+material = SubResource("StandardMaterial3D_1lr8h")
+size = Vector3(1.5, 0.235, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f30d4"]
+size = Vector3(1.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k30mm"]
+albedo_texture = ExtResource("7_ungm2")
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_75gn1"]
+material = SubResource("StandardMaterial3D_k30mm")
+size = Vector3(1.5, 0.5, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hku27"]
 size = Vector3(1.5, 1, 3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cpmst"]
+shading_mode = 0
+albedo_color = Color(0.231373, 0.231373, 0.231373, 1)
 albedo_texture = ExtResource("6_rts6d")
 uv1_scale = Vector3(0.32, 0.32, 0.32)
 uv1_triplanar = true
@@ -63,13 +107,21 @@ texture_filter = 0
 material = SubResource("StandardMaterial3D_cpmst")
 size = Vector3(1.5, 1, 3)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_kfa0l"]
-size = Vector3(7, 1, 2)
+[sub_resource type="BoxShape3D" id="BoxShape3D_ggxas"]
+size = Vector3(7, 3, 5.05244)
 
-[sub_resource type="BoxMesh" id="BoxMesh_tjoyt"]
-size = Vector3(7, 1, 2)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_b71h0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lxykg"]
+size = Vector3(7, 3, 9.40961)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tamc0"]
+size = Vector3(1, 3, 7)
 
 [node name="DeliveryBasement" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bxgc7")
 
 [node name="WallsColliders" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -85,16 +137,12 @@ shape = SubResource("BoxShape3D_b0wkv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0)
 shape = SubResource("BoxShape3D_b0wkv")
 
-[node name="WallKover" type="Sprite3D" parent="WallsColliders/WallWide2"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.51, -0.09022, 0)
-visible = false
-pixel_size = 0.012
-shaded = true
-texture_filter = 0
-texture = ExtResource("2_c1bvm")
-
 [node name="Backwall" type="CollisionShape3D" parent="WallsColliders"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -5)
+shape = SubResource("BoxShape3D_hvpou")
+
+[node name="Frontwall" type="CollisionShape3D" parent="WallsColliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 7.36926)
 shape = SubResource("BoxShape3D_hvpou")
 
 [node name="WallsVisual" type="Node3D" parent="."]
@@ -122,59 +170,136 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5
 cast_shadow = 2
 mesh = SubResource("PlaneMesh_ijxd5")
 
+[node name="Frontwall" type="MeshInstance3D" parent="WallsVisual"]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 1.5, 6.5387)
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_ijxd5")
+
 [node name="Ceiling" type="MeshInstance3D" parent="WallsVisual"]
 transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 3, 0)
 cast_shadow = 2
 mesh = SubResource("PlaneMesh_swlvq")
 
-[node name="FloorKover" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 0.001, 0)
-visible = false
+[node name="ChillZone" type="Node3D" parent="."]
+
+[node name="FloorKover" type="Sprite3D" parent="ChillZone"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.0373138, 0.001, 1.96841)
 pixel_size = 0.012
 shaded = true
+texture_filter = 0
 texture = ExtResource("5_xt4i8")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.54844, 2)
-light_color = Color(1, 0.952941, 0.858824, 1)
-light_energy = 0.642
-light_indirect_energy = 0.821
-omni_range = 7.596
-
-[node name="Couch" type="StaticBody3D" parent="."]
+[node name="Couch" type="StaticBody3D" parent="ChillZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.347, 0, 2)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Couch"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChillZone/Couch"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.329529, 0)
 shape = SubResource("BoxShape3D_se5i2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Couch"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ChillZone/Couch"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33, 0)
+material_override = SubResource("StandardMaterial3D_uijxx")
 mesh = SubResource("BoxMesh_xhpnc")
 
-[node name="Desk" type="StaticBody3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.325918, 0, -2.49488)
+[node name="Table" type="StaticBody3D" parent="ChillZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.347, 0, 2)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Desk"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChillZone/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33, 0)
+shape = SubResource("BoxShape3D_bnq5a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ChillZone/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.540297, 0)
+mesh = SubResource("BoxMesh_w1e5l")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ChillZone/Table"]
+transform = Transform3D(0.972941, 0, -0.231052, 0, 1, 0, 0.231052, 0, 0.972941, -0.00429332, 0.184, 1.2495)
+shape = SubResource("BoxShape3D_f30d4")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ChillZone/Table"]
+transform = Transform3D(0.997592, 0, 0.069356, 0, 1, 0, -0.069356, 0, 0.997592, -0.000402927, 0.184, -1.24984)
+shape = SubResource("BoxShape3D_f30d4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="ChillZone/Table"]
+transform = Transform3D(0.972941, 0, -0.231052, 0, 1, 0, 0.231052, 0, 0.972941, 0.00429332, 0.201293, 1.21334)
+mesh = SubResource("BoxMesh_75gn1")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="ChillZone/Table"]
+transform = Transform3D(0.997592, 0, 0.069356, 0, 1, 0, -0.069356, 0, 0.997592, 0.00469625, 0.201293, -1.23839)
+mesh = SubResource("BoxMesh_75gn1")
+
+[node name="Desk" type="StaticBody3D" parent="ChillZone"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -2.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChillZone/Desk"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_hku27")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Desk"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ChillZone/Desk"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_ynoma")
 
-[node name="Entrance" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+[node name="Lamp" type="OmniLight3D" parent="ChillZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.268, 1.15869, 2.40558)
+light_color = Color(1, 0.952941, 0.858824, 1)
+light_energy = 0.804
+light_indirect_energy = 0.821
+omni_range = 5.24888
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Entrance"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1)
-shape = SubResource("BoxShape3D_kfa0l")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Entrance"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 1)
-mesh = SubResource("BoxMesh_tjoyt")
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+[node name="Darkness" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51971, -3.6451)
 light_negative = true
 omni_range = 6.93498
+
+[node name="Player" parent="." instance=ExtResource("9_l6xuo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164654, 0, 5.24678)
+
+[node name="WatchingZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WatchingZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3.58071)
+shape = SubResource("BoxShape3D_ggxas")
+
+[node name="Employer" type="StaticBody3D" parent="." groups=["Interactables"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.0004)
+script = ExtResource("10_rwf3u")
+intro_dialouge = Array[String](["Hello there!", "I know, i didn't explain job details on the phone, so I'll explain them now.", "I'm an acquaintance of head of city's delivery system.
+When city authorities announced emergency regime, they obviously ordered delivery system to stop. But emergency regime already lasts too long, so people are getting hungry.", "And that's the moment, when we step onto the scene!", "The job is simple - i tell you addres of client, you take order to client, take money and give them their order.
+For now orders will be mostly food, but it is not the only thing people order."])
+
+[node name="EmployerEyes" type="Sprite3D" parent="Employer" node_paths=PackedStringArray("speaking_area")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 2.5)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("10_4yhog")
+script = ExtResource("9_5x3ww")
+speaking_area = NodePath("../../WatchingZone")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Employer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.18746)
+shape = SubResource("CylinderShape3D_b71h0")
+
+[node name="VoicePlayer" type="AudioStreamPlayer3D" parent="Employer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 2.19231)
+stream = ExtResource("13_ps3w3")
+
+[node name="TalkingZone" type="Area3D" parent="Employer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.20453)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Employer/TalkingZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.2048)
+shape = SubResource("BoxShape3D_lxykg")
+
+[node name="Barrier" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.5)
+collision_layer = 2
+collision_mask = 2
+
+[node name="BarrierShape" type="CollisionShape3D" parent="Barrier"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_tamc0")

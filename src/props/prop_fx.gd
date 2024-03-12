@@ -14,12 +14,12 @@ func _ready():
 
 func body_entered(body):
 	for i in len(velocities):
-		if prop_body.linear_velocity.length() >= velocities[i]:
+		if prop_body.linear_velocity.length() + prop_body.angular_velocity.length()/2 >= velocities[i]:
 			stream = sounds[i]
 			play()
 			break
 
-	if prop_body.linear_velocity.length() >= break_speed and break_speed != 0:
+	if prop_body.linear_velocity.length() + prop_body.angular_velocity.length()/2 >= break_speed and break_speed != 0:
 		destroy()
 
 func destroy():
