@@ -8,6 +8,7 @@ enum State {
 }
 
 @onready var collision_shape: CollisionShape3D = $"CollisionShape3D"
+@onready var crouch_checker: ShapeCast3D = $"CrouchChecker"
 
 @export_group("Speeds")
 @export var walking_speed: float
@@ -23,6 +24,7 @@ enum State {
 @export var stamina_low_bound: float
 
 var state: State = State.Walking
+var crouching = false
 
 var speed
 var jump_velocity
@@ -35,10 +37,14 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 
 	#Determine state
+	if Input.is_action_just_pressed("crouch"):
+		crouching = true
+	if not Input.is_action_pressed("crouch") and not crouch_checker.is_colliding():
+		crouching = false
 	stamina = clampf(stamina, 0, max_stamina)
 	if Input.is_action_pressed("run") and stamina > 0:
 		state = State.Running
-	elif Input.is_action_pressed("crouch"):
+	elif crouching:
 		state = State.Crouching
 	else:
 		state = State.Walking

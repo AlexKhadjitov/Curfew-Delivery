@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 FullscreenToggle="res://src/globals/fullscreen_toggle.gd"
 SaveDataManager="*res://src/globals/save_data_manager.gd"
 DialougeManager="*res://src/globals/dialouge_manager.gd"
+SceneManager="*res://src/globals/scene_manager.gd"
 
 [display]
 

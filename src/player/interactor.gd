@@ -20,12 +20,13 @@ func _physics_process(delta):
 			if object.has_method("interact"):
 				object.interact()
 
-	if object != null and "Pickables" in object.get_groups():
+	if object != null and "Grabables" in object.get_groups():
 		player_ui.crosshair.visible = true
 		if Input.is_action_just_pressed("grab"):
 			grab_start(object)
 	
 	if grabbed_obj != null:
+		player_ui.crosshair.visible = true
 		grab_continue(delta)
 		if Input.is_action_just_released("grab"):
 			grab_end()
@@ -47,6 +48,8 @@ func grab_continue(delta):
 	var motion: Vector3
 	motion = grab_point.global_position - grabbed_obj.global_position
 	grabbed_obj.linear_velocity = motion * 10 * (grabbed_obj.global_position.distance_to(grab_point.global_position)+1)
+	grabbed_obj.linear_velocity = grabbed_obj.linear_velocity.normalized() * clamp(grabbed_obj.linear_velocity.length(), 0, 30)
+	grabbed_obj.linear_velocity /= grabbed_obj.mass
 
 	grabbed_obj.global_rotation.x = move_toward(grabbed_obj.global_rotation.x, 0, delta*10)
 	grabbed_obj.global_rotation.y = move_toward(grabbed_obj.global_rotation.y, 0, delta*10)

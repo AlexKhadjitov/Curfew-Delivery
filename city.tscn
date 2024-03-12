@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cuhwca406f2ns"]
+[gd_scene load_steps=15 format=3 uid="uid://cuhwca406f2ns"]
 
 [ext_resource type="PackedScene" uid="uid://blhsdt7p77ph7" path="res://models/buildings/panel_buildings/9a_section.tscn" id="1_d653t"]
 [ext_resource type="Material" uid="uid://cfgo14n0x0i6g" path="res://materials/road.tres" id="2_a1wg8"]
 [ext_resource type="Texture2D" uid="uid://8x8rtkw1iso8" path="res://textures/bordur.png" id="3_ysrih"]
-[ext_resource type="PackedScene" uid="uid://bnca6dhckltj0" path="res://player.tscn" id="4_ur43n"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rq7mv"]
 sky_top_color = Color(0.054902, 0.0862745, 0.129412, 1)
@@ -62,6 +61,18 @@ size = Vector3(40, 0.51, 25)
 
 [node name="City" type="Node3D"]
 
+[node name="0" type="Node3D" parent="." groups=["Spawnpoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.4816, 0, 8)
+
+[node name="1" type="Node3D" parent="." groups=["Spawnpoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.45477, 0, 8)
+
+[node name="2" type="Node3D" parent="." groups=["Spawnpoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0867, 4.78971, 9.2785)
+
+[node name="3" type="Node3D" parent="." groups=["Spawnpoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.01592, 4.57276, 8)
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 visible = false
@@ -96,6 +107,3 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212719, 0)
 shape = SubResource("BoxShape3D_v8wjp")
-
-[node name="Player" parent="." instance=ExtResource("4_ur43n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.64625, 0, 10.9475)

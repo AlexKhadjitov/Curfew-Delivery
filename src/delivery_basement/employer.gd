@@ -12,11 +12,18 @@ func _ready():
     talking_zone.body_exited.connect(tz_player_exited)
 
 func interact():
+    
     DialougeManager.start_dialouge(intro_dialouge, "intro_dialouge", play_voice, 0.05)
     DialougeManager.play_dialouge("intro_dialouge")
 
+    if not DialougeManager.get_dialouge("intro_dialouge").on_end.is_connected(on_intro_dialouge_end):
+        DialougeManager.get_dialouge("intro_dialouge").on_end.connect(on_intro_dialouge_end)
+
 func play_voice():
     voice_player.play()
+
+func on_intro_dialouge_end():
+    print("end")
 
 func tz_player_entered(body):
     if DialougeManager.get_dialouge("intro_dialouge") != null:

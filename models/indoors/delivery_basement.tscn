@@ -1,9 +1,9 @@
-[gd_scene load_steps=40 format=3 uid="uid://nkflkqse5nef"]
+[gd_scene load_steps=53 format=3 uid="uid://nkflkqse5nef"]
 
 [ext_resource type="Texture2D" uid="uid://e6sjtuu6wg1x" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Stone/Stone_06-128x128.png" id="1_844k1"]
 [ext_resource type="Material" uid="uid://dg26602hdlop7" path="res://materials/basement_wall.tres" id="2_o0geh"]
 [ext_resource type="Texture2D" uid="uid://qqhqxo3r0sdc" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Stone/Stone_22-128x128.png" id="4_t3gu1"]
-[ext_resource type="Texture2D" uid="uid://qexobxpkoq0g" path="res://textures/wall hangers/kover2.png" id="5_xt4i8"]
+[ext_resource type="Texture2D" uid="uid://qexobxpkoq0g" path="res://textures/kover2.png" id="5_xt4i8"]
 [ext_resource type="Texture2D" uid="uid://dffeb33du4ct8" path="res://textures/SBS - Tiny Texture Pack 2 - 128x128/128x128/Wood/Wood_04-128x128.png" id="6_ojcli"]
 [ext_resource type="Texture2D" uid="uid://dwqbn5d5o3y45" path="res://textures/SBS - Tiny Texture Pack - 128x128/128x128/Wood/Wood_08-128x128.png" id="6_rts6d"]
 [ext_resource type="Texture2D" uid="uid://b2yir7jskntvh" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Cloth/Cloth_02-128x128.png" id="6_tv5g1"]
@@ -13,6 +13,13 @@
 [ext_resource type="Texture2D" uid="uid://dac4di5pjil6e" path="res://textures/delivery_basement/employer_eyes.png" id="10_4yhog"]
 [ext_resource type="Script" path="res://src/delivery_basement/employer.gd" id="10_rwf3u"]
 [ext_resource type="AudioStream" uid="uid://do1hwj33lhyna" path="res://audio/voices/employer_voice.wav" id="13_ps3w3"]
+[ext_resource type="Texture2D" uid="uid://c8s4tgonvosmv" path="res://textures/delivery_basement/door.png" id="14_82wgx"]
+[ext_resource type="Script" path="res://src/door.gd" id="14_nu7l5"]
+[ext_resource type="PackedScene" uid="uid://cuhwca406f2ns" path="res://city.tscn" id="15_bg3f8"]
+[ext_resource type="Texture2D" uid="uid://cxe4k0nr43ev1" path="res://textures/delivery_basement/tutorial_posters/grabbing_objects.png" id="15_gjhp2"]
+[ext_resource type="Texture2D" uid="uid://dyrp51vdpdu7b" path="res://textures/delivery_basement/tutorial_posters/be_nice.png" id="16_ywo0l"]
+[ext_resource type="Texture2D" uid="uid://c0ai0yo7oymf2" path="res://textures/delivery_basement/tutorial_posters/think_different.png" id="17_m0guo"]
+[ext_resource type="Texture2D" uid="uid://bps22bcbp2stg" path="res://textures/kover1.png" id="18_qn4lc"]
 
 [sub_resource type="Environment" id="Environment_bxgc7"]
 background_energy_multiplier = 0.03
@@ -22,10 +29,16 @@ ssao_enabled = true
 size = Vector3(10, 1, 14)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b0wkv"]
-size = Vector3(1, 3, 14)
+size = Vector3(3, 3, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_75e43"]
+size = Vector3(3, 0.779, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hvpou"]
 size = Vector3(10, 3, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u3cd7"]
+size = Vector3(1, 2, 3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ffwus"]
 albedo_color = Color(0.709804, 0.654902, 0.588235, 1)
@@ -39,6 +52,10 @@ size = Vector2(10, 14)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fx3gm"]
 size = Vector2(3, 14)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8jwe8"]
+material = ExtResource("2_o0geh")
+size = Vector2(2, 3)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ijxd5"]
 material = ExtResource("2_o0geh")
@@ -108,7 +125,7 @@ material = SubResource("StandardMaterial3D_cpmst")
 size = Vector3(1.5, 1, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ggxas"]
-size = Vector3(7, 3, 5.05244)
+size = Vector3(7, 3, 4.95396)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_b71h0"]
 
@@ -118,10 +135,24 @@ size = Vector3(7, 3, 9.40961)
 [sub_resource type="BoxShape3D" id="BoxShape3D_tamc0"]
 size = Vector3(1, 3, 7)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_5rwxi"]
+size = Vector3(1, 2, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t5ji4"]
+albedo_texture = ExtResource("14_82wgx")
+uv1_scale = Vector3(-1, 1, 1)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_66p0i"]
+size = Vector2(1, 2)
+
 [node name="DeliveryBasement" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bxgc7")
+
+[node name="Player" parent="." instance=ExtResource("9_l6xuo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.33588)
 
 [node name="WallsColliders" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -130,12 +161,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_m6pet")
 
 [node name="WallWide" type="CollisionShape3D" parent="WallsColliders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -3)
+shape = SubResource("BoxShape3D_b0wkv")
+
+[node name="WallWide3" type="CollisionShape3D" parent="WallsColliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 7.5)
 shape = SubResource("BoxShape3D_b0wkv")
 
 [node name="WallWide2" type="CollisionShape3D" parent="WallsColliders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 0)
 shape = SubResource("BoxShape3D_b0wkv")
+
+[node name="WallWide6" type="CollisionShape3D" parent="WallsColliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 5)
+shape = SubResource("BoxShape3D_b0wkv")
+
+[node name="WallWide4" type="CollisionShape3D" parent="WallsColliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.883677, 2)
+shape = SubResource("BoxShape3D_75e43")
+
+[node name="WallWide7" type="CollisionShape3D" parent="WallsColliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3.38999, 2)
+shape = SubResource("BoxShape3D_75e43")
+
+[node name="WallWide5" type="CollisionShape3D" parent="WallsColliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 3.1106, 2)
+shape = SubResource("BoxShape3D_75e43")
 
 [node name="Backwall" type="CollisionShape3D" parent="WallsColliders"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -5)
@@ -145,6 +196,10 @@ shape = SubResource("BoxShape3D_hvpou")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 7.36926)
 shape = SubResource("BoxShape3D_hvpou")
 
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WallsColliders"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2, 2)
+shape = SubResource("BoxShape3D_u3cd7")
+
 [node name="WallsVisual" type="Node3D" parent="."]
 
 [node name="Floor" type="MeshInstance3D" parent="WallsVisual"]
@@ -153,13 +208,55 @@ cast_shadow = 2
 mesh = SubResource("PlaneMesh_bl4xa")
 skeleton = NodePath("../../WallsColliders")
 
-[node name="WallWide" type="MeshInstance3D" parent="WallsVisual"]
+[node name="WallWideRight" type="MeshInstance3D" parent="WallsVisual"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 3.5, 1.5, 0)
 material_override = ExtResource("2_o0geh")
 cast_shadow = 2
 mesh = SubResource("PlaneMesh_fx3gm")
 
-[node name="WallWide2" type="MeshInstance3D" parent="WallsVisual"]
+[node name="WallWideRight2" type="MeshInstance3D" parent="WallsVisual"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 6.5, 1.5, 2)
+material_override = ExtResource("2_o0geh")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8jwe8")
+
+[node name="WallWideRight3" type="MeshInstance3D" parent="WallsVisual"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, -4.37114e-08, 5.0017, 1.5, 3.48153)
+material_override = ExtResource("2_o0geh")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8jwe8")
+
+[node name="WallWideRight4" type="MeshInstance3D" parent="WallsVisual"]
+transform = Transform3D(-5.73206e-15, -1.31134e-07, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, 1.31134e-07, 5.0017, 1.5, 1.08322)
+material_override = ExtResource("2_o0geh")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8jwe8")
+
+[node name="WallWideRight5" type="MeshInstance3D" parent="WallsVisual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0017, 0.5, 2.08322)
+material_override = ExtResource("2_o0geh")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8jwe8")
+
+[node name="WallWideRight6" type="MeshInstance3D" parent="WallsVisual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0.5, 2.083)
+material_override = ExtResource("2_o0geh")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8jwe8")
+
+[node name="WallWideRight7" type="MeshInstance3D" parent="WallsVisual"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 4.5, 2.5, 2.08322)
+material_override = ExtResource("2_o0geh")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8jwe8")
+
+[node name="WallWideRight8" type="MeshInstance3D" parent="WallsVisual"]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 6.0017, 2.5, 2.083)
+material_override = ExtResource("2_o0geh")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8jwe8")
+
+[node name="WallWideLeft" type="MeshInstance3D" parent="WallsVisual"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -3.5, 1.5, 0)
 material_override = ExtResource("2_o0geh")
 cast_shadow = 2
@@ -251,27 +348,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.51971, -3.6451)
 light_negative = true
 omni_range = 6.93498
 
-[node name="Player" parent="." instance=ExtResource("9_l6xuo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0164654, 0, 5.24678)
-
 [node name="WatchingZone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WatchingZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3.58071)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 3.62995)
 shape = SubResource("BoxShape3D_ggxas")
 
 [node name="Employer" type="StaticBody3D" parent="." groups=["Interactables"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.0004)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9721)
 script = ExtResource("10_rwf3u")
 intro_dialouge = Array[String](["Hello there!", "I know, i didn't explain job details on the phone, so I'll explain them now.", "I'm an acquaintance of head of city's delivery system.
 When city authorities announced emergency regime, they obviously ordered delivery system to stop. But emergency regime already lasts too long, so people are getting hungry.", "And that's the moment, when we step onto the scene!", "The job is simple - i tell you addres of client, you take order to client, take money and give them their order.
 For now orders will be mostly food, but it is not the only thing people order."])
 
 [node name="EmployerEyes" type="Sprite3D" parent="Employer" node_paths=PackedStringArray("speaking_area")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0.5)
 billboard = 2
 texture_filter = 0
 texture = ExtResource("10_4yhog")
@@ -279,15 +373,15 @@ script = ExtResource("9_5x3ww")
 speaking_area = NodePath("../../WatchingZone")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Employer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.18746)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.174134)
 shape = SubResource("CylinderShape3D_b71h0")
 
 [node name="VoicePlayer" type="AudioStreamPlayer3D" parent="Employer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 2.19231)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0.17899)
 stream = ExtResource("13_ps3w3")
 
 [node name="TalkingZone" type="Area3D" parent="Employer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.20453)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.191208)
 collision_layer = 2
 collision_mask = 2
 
@@ -303,3 +397,53 @@ collision_mask = 2
 [node name="BarrierShape" type="CollisionShape3D" parent="Barrier"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_tamc0")
+
+[node name="Door" type="StaticBody3D" parent="." node_paths=PackedStringArray("scene_from") groups=["Interactables"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.499)
+script = ExtResource("14_nu7l5")
+scene_from = NodePath("..")
+scene_to = ExtResource("15_bg3f8")
+to_saved_spawnpoint = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_5rwxi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0.039)
+material_override = SubResource("StandardMaterial3D_t5ji4")
+mesh = SubResource("PlaneMesh_66p0i")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Tutorials" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.260565, 0.660939, 2.24585)
+
+[node name="Pick objects" type="Sprite3D" parent="Tutorials"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0.157727, 0.987483, -6.89447e-09, 0.987483, -0.157727, -4.31642e-08, 0.00100005, 1.883, -1.20426)
+pixel_size = 0.015
+transparent = false
+shaded = true
+texture_filter = 0
+texture = ExtResource("15_gjhp2")
+
+[node name="Be nice" type="Sprite3D" parent="Tutorials"]
+transform = Transform3D(-3.67957e-08, 7.51776e-10, -1, -0.186833, 0.982392, 7.61317e-09, 0.982392, 0.186833, -3.60073e-08, -0.001, 1.885, 0.863)
+pixel_size = 0.015
+transparent = false
+shaded = true
+texture_filter = 0
+texture = ExtResource("16_ywo0l")
+
+[node name="Think Different" type="Sprite3D" parent="Tutorials"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 1.55226, -0.104262)
+transparent = false
+shaded = true
+texture_filter = 0
+texture = ExtResource("17_m0guo")
+
+[node name="WallKover" type="Sprite3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.489, 1.5, 2)
+shaded = true
+texture = ExtResource("18_qn4lc")
