@@ -26,6 +26,7 @@ func play_dialouge():
 	if current_slide >= len(dialouge):
 		is_slide_playing = false
 		end_dialouge()
+		return
 
 	await play_slide(dialouge[current_slide])
 	
@@ -45,6 +46,7 @@ func play_slide(slide_text: String):
 	for symbol in slide_text:
 		if slide_skipped:
 			slide_skipped = false
+			current_slide -= 1 ##TODO: Change this workaround
 			break
 
 		if is_paused:
@@ -54,6 +56,7 @@ func play_slide(slide_text: String):
 		if not symbol in [" ", ".", ",", ""]:
 			on_play_voice.emit()
 		await get_tree().create_timer(symbol_speed).timeout
+	
 	is_slide_playing = false
 	on_slide_end.emit()
 
