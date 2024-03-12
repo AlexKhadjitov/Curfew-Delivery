@@ -1,17 +1,15 @@
-[gd_scene load_steps=40 format=3 uid="uid://blhsdt7p77ph7"]
+[gd_scene load_steps=34 format=3 uid="uid://blhsdt7p77ph7"]
 
 [ext_resource type="Shader" path="res://materials/panel_building.gdshader" id="1_lfiyr"]
 [ext_resource type="Texture2D" uid="uid://bcl04q775yd8v" path="res://textures/panel_buildings/panel9_frontwall.png" id="2_y6ayj"]
 [ext_resource type="Texture2D" uid="uid://bsib741m1odxx" path="res://textures/panel_buildings/panel9_backwall.png" id="3_eta7y"]
 [ext_resource type="Texture2D" uid="uid://ct02xtdielmxf" path="res://textures/panel_buildings/panel9_under.png" id="4_7fcbu"]
 [ext_resource type="Texture2D" uid="uid://dljbwvpjjvjml" path="res://textures/panel_buildings/cell.png" id="4_vxqpo"]
+[ext_resource type="PackedScene" uid="uid://cr0jvddy3xtqg" path="res://models/buildings/panel_buildings/9a_balconies.tscn" id="5_gkf7y"]
 [ext_resource type="Texture2D" uid="uid://c2h5noiuycy0j" path="res://textures/SBS - Tiny Texture Pack 2 - 128x128/128x128/Metal/Metal_10-128x128.png" id="5_qbgko"]
-[ext_resource type="Texture2D" uid="uid://clcwc6yxak1ex" path="res://textures/panel_buildings/panel9_balcony_side.png" id="5_xo8qq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vofw7"]
-size = Vector3(21, 27, 12)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f1bav"]
+size = Vector3(21, 28, 12)
 
 [sub_resource type="Gradient" id="Gradient_f4cp3"]
 
@@ -24,6 +22,7 @@ color_ramp = SubResource("Gradient_f4cp3")
 noise = SubResource("FastNoiseLite_td814")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_55iiu"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1_lfiyr")
 shader_parameter/x_panels = 7.0
@@ -36,7 +35,7 @@ shader_parameter/rand = SubResource("NoiseTexture2D_ma06n")
 [sub_resource type="PlaneMesh" id="PlaneMesh_hhxxd"]
 size = Vector2(21, 27)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pcx2t"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnrcg"]
 render_priority = 0
 shader = ExtResource("1_lfiyr")
 shader_parameter/x_panels = 7.0
@@ -47,18 +46,6 @@ shader_parameter/wall_texture = ExtResource("3_eta7y")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vqpiy"]
 size = Vector2(21, 27)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqwu4"]
-render_priority = 0
-shader = ExtResource("1_lfiyr")
-shader_parameter/x_panels = 4.0
-shader_parameter/y_panels = 9.0
-shader_parameter/texture_x_variations = 4.0
-shader_parameter/texture_y_variations = 4.0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_lvwrg"]
-material = SubResource("ShaderMaterial_lqwu4")
-size = Vector2(27, 12)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pc2q2"]
 albedo_texture = ExtResource("4_7fcbu")
@@ -72,32 +59,11 @@ texture_filter = 0
 material = SubResource("StandardMaterial3D_pc2q2")
 size = Vector3(21, 1, 12)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a61l4"]
-render_priority = 0
-shader = ExtResource("1_lfiyr")
-shader_parameter/x_panels = 1.0
-shader_parameter/y_panels = 9.0
-shader_parameter/texture_x_variations = 0.5
-shader_parameter/texture_y_variations = 1.0
-shader_parameter/wall_texture = ExtResource("5_xo8qq")
+[sub_resource type="BoxMesh" id="BoxMesh_4hokl"]
+size = Vector3(21, 1, 12.5)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_n6dj5"]
-size = Vector2(6, 27)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m45k0"]
-render_priority = 0
-shader = ExtResource("1_lfiyr")
-shader_parameter/x_panels = 1.0
-shader_parameter/y_panels = 9.0
-shader_parameter/texture_x_variations = 1.0
-shader_parameter/texture_y_variations = 1.0
-shader_parameter/wall_texture = ExtResource("5_xo8qq")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_f2x82"]
-size = Vector2(1.5, 27)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_a85y0"]
-size = Vector2(6, 1.5)
+[sub_resource type="BoxMesh" id="BoxMesh_gnxyo"]
+size = Vector3(6, 4, 4)
 
 [sub_resource type="BoxMesh" id="BoxMesh_6kc1m"]
 size = Vector3(4, 0.2, 3)
@@ -161,52 +127,38 @@ size = Vector3(0.2, 3, 2.25)
 [node name="9aSection" type="StaticBody3D"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14, 0)
 shape = SubResource("BoxShape3D_vofw7")
 
 [node name="FrontWall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 14.5, 6)
-material_override = SubResource("ShaderMaterial_f1bav")
 material_overlay = SubResource("ShaderMaterial_55iiu")
 cast_shadow = 2
 mesh = SubResource("PlaneMesh_hhxxd")
 
 [node name="Backwall" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 14.5, -6)
-material_override = SubResource("ShaderMaterial_pcx2t")
+material_override = SubResource("ShaderMaterial_xnrcg")
 mesh = SubResource("PlaneMesh_vqpiy")
-
-[node name="SideWall" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 10.5, 14.5, 0)
-mesh = SubResource("PlaneMesh_lvwrg")
 
 [node name="Underside" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_rceyx")
 
-[node name="Balconies" type="Node3D" parent="."]
+[node name="Upperside" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 28.5, 0)
+material_override = SubResource("StandardMaterial3D_pc2q2")
+mesh = SubResource("BoxMesh_4hokl")
 
-[node name="Front" type="MeshInstance3D" parent="Balconies"]
-transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, -1.5, 14.5, -7.5)
-material_override = SubResource("ShaderMaterial_a61l4")
-mesh = SubResource("PlaneMesh_n6dj5")
+[node name="RoofRoom" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 31, 2)
+mesh = SubResource("BoxMesh_gnxyo")
 
-[node name="Side" type="MeshInstance3D" parent="Balconies"]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 1.5, 14.5, -6.75)
-material_override = SubResource("ShaderMaterial_m45k0")
-mesh = SubResource("PlaneMesh_f2x82")
-
-[node name="Side2" type="MeshInstance3D" parent="Balconies"]
-transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, -4.5, 14.5, -6.75)
-material_override = SubResource("ShaderMaterial_m45k0")
-mesh = SubResource("PlaneMesh_f2x82")
-
-[node name="Underside" type="MeshInstance3D" parent="Balconies"]
-transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, -1.5, 1, -6.75)
-mesh = SubResource("PlaneMesh_a85y0")
+[node name="Balconies" parent="." instance=ExtResource("5_gkf7y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49784, 0, 0)
 
 [node name="Entrance" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 6)
 
 [node name="Floor" type="MeshInstance3D" parent="Entrance"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.502757, 0.1, 1.47856)

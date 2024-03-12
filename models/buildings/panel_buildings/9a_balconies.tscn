@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://cr0jvddy3xtqg"]
+
+[ext_resource type="Shader" path="res://materials/panel_building.gdshader" id="1_wvdyw"]
+[ext_resource type="Texture2D" uid="uid://clcwc6yxak1ex" path="res://textures/panel_buildings/panel9_balcony_side.png" id="2_yp71p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a61l4"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_wvdyw")
+shader_parameter/x_panels = 1.0
+shader_parameter/y_panels = 9.0
+shader_parameter/texture_x_variations = 0.5
+shader_parameter/texture_y_variations = 1.0
+shader_parameter/wall_texture = ExtResource("2_yp71p")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n6dj5"]
+size = Vector2(6, 27)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m45k0"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_wvdyw")
+shader_parameter/x_panels = 1.0
+shader_parameter/y_panels = 9.0
+shader_parameter/texture_x_variations = 1.0
+shader_parameter/texture_y_variations = 1.0
+shader_parameter/wall_texture = ExtResource("2_yp71p")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f2x82"]
+size = Vector2(1.5, 27)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a85y0"]
+size = Vector2(6, 1.5)
+
+[node name="Balconies" type="Node3D"]
+
+[node name="Front" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0, 14.5, -7.5)
+material_override = SubResource("ShaderMaterial_a61l4")
+mesh = SubResource("PlaneMesh_n6dj5")
+
+[node name="Side" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 3, 14.5, -6.75)
+material_override = SubResource("ShaderMaterial_m45k0")
+mesh = SubResource("PlaneMesh_f2x82")
+
+[node name="Side2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, -3, 14.5, -6.75)
+material_override = SubResource("ShaderMaterial_m45k0")
+mesh = SubResource("PlaneMesh_f2x82")
+
+[node name="Underside" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 1, -6.75)
+mesh = SubResource("PlaneMesh_a85y0")

@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjuv4tc57xttc"]
+
+[ext_resource type="Shader" path="res://materials/panel_building.gdshader" id="1_5awau"]
+[ext_resource type="Texture2D" uid="uid://c8g3w43030ki7" path="res://textures/panel_buildings/blank_wall.png" id="2_hbb68"]
+[ext_resource type="PackedScene" uid="uid://cr0jvddy3xtqg" path="res://models/buildings/panel_buildings/9a_balconies.tscn" id="3_5eoro"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_prd3x"]
+render_priority = 0
+shader = ExtResource("1_5awau")
+shader_parameter/x_panels = 4.0
+shader_parameter/y_panels = 9.0
+shader_parameter/texture_x_variations = 1.0
+shader_parameter/texture_y_variations = 1.0
+shader_parameter/wall_texture = ExtResource("2_hbb68")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mh2r5"]
+size = Vector2(12, 27)
+
+[node name="9aSide" type="Node3D"]
+
+[node name="SideWall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 14.5, 0)
+material_override = SubResource("ShaderMaterial_prd3x")
+mesh = SubResource("PlaneMesh_mh2r5")
+
+[node name="Balconies" parent="." instance=ExtResource("3_5eoro")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -6)

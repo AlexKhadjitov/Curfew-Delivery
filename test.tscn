@@ -1,9 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://cjoq1mm8ce4wo"]
+[gd_scene load_steps=37 format=3 uid="uid://cjoq1mm8ce4wo"]
 
+[ext_resource type="Script" path="res://src/player_spawner.gd" id="1_mc5o1"]
 [ext_resource type="Texture2D" uid="uid://dj5svprvl143e" path="res://textures/SBS - Tiny Texture Pack 2 - 128x128/128x128/Tile/Tile_01-128x128.png" id="2_7yuwi"]
 [ext_resource type="Script" path="res://src/props/prop_fx.gd" id="4_snlsy"]
-[ext_resource type="AudioStream" uid="uid://chwae56e65ns6" path="res://audio/props/glass/bowl dropped and breaks on tile floor 2.wav" id="5_4ml6n"]
-[ext_resource type="AudioStream" uid="uid://dn5lbdb05esnr" path="res://audio/props/glass/glass ding 4.wav" id="5_b4eve"]
+[ext_resource type="AudioStream" uid="uid://chwae56e65ns6" path="res://audio/surfaces/glass/bowl dropped and breaks on tile floor 2.wav" id="5_4ml6n"]
+[ext_resource type="AudioStream" uid="uid://dn5lbdb05esnr" path="res://audio/surfaces/glass/glass ding 4.wav" id="5_b4eve"]
+[ext_resource type="Script" path="res://src/surface_sounds.gd" id="6_0b8pk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u4ojk"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -18,8 +20,8 @@ sky = SubResource("Sky_p315e")
 tonemap_mode = 2
 ssao_enabled = true
 ssil_enabled = true
+sdfgi_enabled = true
 sdfgi_use_occlusion = true
-glow_enabled = true
 
 [sub_resource type="PrismMesh" id="PrismMesh_sqa1c"]
 size = Vector3(4, 2, 4)
@@ -95,6 +97,22 @@ size = Vector3(4, 0.2, 0.25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xjuj4"]
 size = Vector3(4, 0.2, 0.25)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_a4gye"]
+size = Vector3(3, 3, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dnc2x"]
+size = Vector3(3, 3, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gx4a4"]
+size = Vector3(1, 1, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpmob"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_emjdy"]
+material = SubResource("StandardMaterial3D_gpmob")
+size = Vector3(1, 1, 1.25)
+
 [node name="Test" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -105,6 +123,9 @@ shadow_enabled = true
 environment = SubResource("Environment_mocj5")
 
 [node name="Spawnpoint" type="Node3D" parent="." groups=["Spanwpoints"]]
+
+[node name="PlayerSpawner" type="Node3D" parent="."]
+script = ExtResource("1_mc5o1")
 
 [node name="Ground" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -152,6 +173,9 @@ mesh = SubResource("SphereMesh_k3olg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SoccerBall"]
 shape = SubResource("SphereShape3D_11fyg")
+
+[node name="PropFX" type="AudioStreamPlayer3D" parent="SoccerBall"]
+script = ExtResource("4_snlsy")
 
 [node name="Bottle" type="RigidBody3D" parent="." groups=["Grabables"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66011, 0.4932, 2.14616)
@@ -243,3 +267,26 @@ mesh = SubResource("BoxMesh_w3yei")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SlidingDoorBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 shape = SubResource("BoxShape3D_xjuj4")
+
+[node name="Wall" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -9)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_a4gye")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("BoxMesh_dnc2x")
+
+[node name="Window" type="StaticBody3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("6_0b8pk")
+velocities = Array[float]([10.0])
+sounds = Array[AudioStream]([ExtResource("5_4ml6n")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/Window"]
+shape = SubResource("BoxShape3D_gx4a4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall/Window"]
+mesh = SubResource("BoxMesh_emjdy")

@@ -6,10 +6,14 @@ class_name Employer
 
 @onready var voice_player: AudioStreamPlayer3D = $"VoicePlayer"
 @onready var talking_zone: Area3D = $"TalkingZone"
+@onready var door: Door = $"../Door"
 
 func _ready():
     talking_zone.body_entered.connect(tz_player_entered)
     talking_zone.body_exited.connect(tz_player_exited)
+
+    if SaveDataManager.current_save_data.intro_dialouge_played == true:
+        door.locked = false
 
 func interact():
     
@@ -23,7 +27,8 @@ func play_voice():
     voice_player.play()
 
 func on_intro_dialouge_end():
-    print("end")
+    SaveDataManager.current_save_data.intro_dialouge_played = true
+    door.unlock()
 
 func tz_player_entered(body):
     if DialougeManager.get_dialouge("intro_dialouge") != null:

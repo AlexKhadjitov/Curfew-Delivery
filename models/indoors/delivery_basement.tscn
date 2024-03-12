@@ -9,21 +9,22 @@
 [ext_resource type="Texture2D" uid="uid://b2yir7jskntvh" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Cloth/Cloth_02-128x128.png" id="6_tv5g1"]
 [ext_resource type="Texture2D" uid="uid://b82waj3le564" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Stone/Stone_05-128x128.png" id="7_ungm2"]
 [ext_resource type="Script" path="res://src/delivery_basement/employer_eyes.gd" id="9_5x3ww"]
-[ext_resource type="PackedScene" uid="uid://bnca6dhckltj0" path="res://player.tscn" id="9_l6xuo"]
 [ext_resource type="Texture2D" uid="uid://dac4di5pjil6e" path="res://textures/delivery_basement/employer_eyes.png" id="10_4yhog"]
 [ext_resource type="Script" path="res://src/delivery_basement/employer.gd" id="10_rwf3u"]
 [ext_resource type="AudioStream" uid="uid://do1hwj33lhyna" path="res://audio/voices/employer_voice.wav" id="13_ps3w3"]
 [ext_resource type="Texture2D" uid="uid://c8s4tgonvosmv" path="res://textures/delivery_basement/door.png" id="14_82wgx"]
 [ext_resource type="Script" path="res://src/door.gd" id="14_nu7l5"]
-[ext_resource type="PackedScene" uid="uid://cuhwca406f2ns" path="res://city.tscn" id="15_bg3f8"]
 [ext_resource type="Texture2D" uid="uid://cxe4k0nr43ev1" path="res://textures/delivery_basement/tutorial_posters/grabbing_objects.png" id="15_gjhp2"]
 [ext_resource type="Texture2D" uid="uid://dyrp51vdpdu7b" path="res://textures/delivery_basement/tutorial_posters/be_nice.png" id="16_ywo0l"]
 [ext_resource type="Texture2D" uid="uid://c0ai0yo7oymf2" path="res://textures/delivery_basement/tutorial_posters/think_different.png" id="17_m0guo"]
 [ext_resource type="Texture2D" uid="uid://bps22bcbp2stg" path="res://textures/kover1.png" id="18_qn4lc"]
+[ext_resource type="PackedScene" uid="uid://cuhwca406f2ns" path="res://city.tscn" id="19_xixvx"]
+[ext_resource type="Script" path="res://src/player_spawner.gd" id="19_yp55c"]
 
 [sub_resource type="Environment" id="Environment_bxgc7"]
 background_energy_multiplier = 0.03
 ssao_enabled = true
+ssil_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_m6pet"]
 size = Vector3(10, 1, 14)
@@ -151,8 +152,12 @@ size = Vector2(1, 2)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bxgc7")
 
-[node name="Player" parent="." instance=ExtResource("9_l6xuo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.33588)
+[node name="PlayerSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+script = ExtResource("19_yp55c")
+
+[node name="0" type="Node3D" parent="." groups=["Spawnpoints"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 
 [node name="WallsColliders" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -277,6 +282,12 @@ transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 3, 
 cast_shadow = 2
 mesh = SubResource("PlaneMesh_swlvq")
 
+[node name="WallKover" type="Sprite3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.489, 1.5, 2)
+shaded = true
+texture_filter = 0
+texture = ExtResource("18_qn4lc")
+
 [node name="ChillZone" type="Node3D" parent="."]
 
 [node name="FloorKover" type="Sprite3D" parent="ChillZone"]
@@ -398,25 +409,6 @@ collision_mask = 2
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_tamc0")
 
-[node name="Door" type="StaticBody3D" parent="." node_paths=PackedStringArray("scene_from") groups=["Interactables"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.499)
-script = ExtResource("14_nu7l5")
-scene_from = NodePath("..")
-scene_to = ExtResource("15_bg3f8")
-to_saved_spawnpoint = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_5rwxi")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Door"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0.039)
-material_override = SubResource("StandardMaterial3D_t5ji4")
-mesh = SubResource("PlaneMesh_66p0i")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Door"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
 [node name="Tutorials" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.260565, 0.660939, 2.24585)
 
@@ -443,7 +435,23 @@ shaded = true
 texture_filter = 0
 texture = ExtResource("17_m0guo")
 
-[node name="WallKover" type="Sprite3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.489, 1.5, 2)
-shaded = true
-texture = ExtResource("18_qn4lc")
+[node name="Door" type="StaticBody3D" parent="." node_paths=PackedStringArray("scene_from") groups=["Interactables"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.499)
+script = ExtResource("14_nu7l5")
+scene_from = NodePath("..")
+scene_to = "res://city.tscn"
+packed_scene_to = ExtResource("19_xixvx")
+to_saved_spawnpoint = true
+locked = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_5rwxi")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0.039)
+material_override = SubResource("StandardMaterial3D_t5ji4")
+mesh = SubResource("PlaneMesh_66p0i")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

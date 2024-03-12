@@ -1,8 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://cuhwca406f2ns"]
+[gd_scene load_steps=25 format=3 uid="uid://cuhwca406f2ns"]
 
 [ext_resource type="PackedScene" uid="uid://blhsdt7p77ph7" path="res://models/buildings/panel_buildings/9a_section.tscn" id="1_d653t"]
+[ext_resource type="Script" path="res://src/player_spawner.gd" id="1_ypmij"]
 [ext_resource type="Material" uid="uid://cfgo14n0x0i6g" path="res://materials/road.tres" id="2_a1wg8"]
+[ext_resource type="Shader" path="res://materials/panel_building.gdshader" id="3_qus8l"]
 [ext_resource type="Texture2D" uid="uid://8x8rtkw1iso8" path="res://textures/bordur.png" id="3_ysrih"]
+[ext_resource type="PackedScene" uid="uid://x6p5ftktastk" path="res://models/buildings/delivery_basement_entrance.tscn" id="4_bmw10"]
+[ext_resource type="Texture2D" uid="uid://bcl04q775yd8v" path="res://textures/panel_buildings/panel9_frontwall.png" id="4_olgws"]
+[ext_resource type="PackedScene" uid="uid://cjuv4tc57xttc" path="res://models/buildings/panel_buildings/9a_side.tscn" id="5_fpyoq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rq7mv"]
 sky_top_color = Color(0.054902, 0.0862745, 0.129412, 1)
@@ -22,6 +27,31 @@ ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 glow_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_f4cp3"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_td814"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ma06n"]
+width = 128
+height = 128
+color_ramp = SubResource("Gradient_f4cp3")
+noise = SubResource("FastNoiseLite_td814")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bo5uc"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_qus8l")
+shader_parameter/x_panels = 7.0
+shader_parameter/y_panels = 9.0
+shader_parameter/texture_x_variations = 7.0
+shader_parameter/texture_y_variations = 4.0
+shader_parameter/wall_texture = ExtResource("4_olgws")
+shader_parameter/rand = SubResource("NoiseTexture2D_ma06n")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nivo5"]
+resource_local_to_scene = true
+size = Vector2(1.5, 2.5)
 
 [sub_resource type="Gradient" id="Gradient_7uptj"]
 offsets = PackedFloat32Array(0, 0.259124, 1)
@@ -61,18 +91,6 @@ size = Vector3(40, 0.51, 25)
 
 [node name="City" type="Node3D"]
 
-[node name="0" type="Node3D" parent="." groups=["Spawnpoints"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.4816, 0, 8)
-
-[node name="1" type="Node3D" parent="." groups=["Spawnpoints"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.45477, 0, 8)
-
-[node name="2" type="Node3D" parent="." groups=["Spawnpoints"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0867, 4.78971, 9.2785)
-
-[node name="3" type="Node3D" parent="." groups=["Spawnpoints"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.01592, 4.57276, 8)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 visible = false
@@ -80,6 +98,10 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kio6l")
+
+[node name="PlayerSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 8)
+script = ExtResource("1_ypmij")
 
 [node name="Buildings" type="Node3D" parent="."]
 
@@ -90,10 +112,22 @@ environment = SubResource("Environment_kio6l")
 [node name="9aSection2" parent="Buildings/Building1" instance=ExtResource("1_d653t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0, 0)
 
-[node name="Bordur" type="MeshInstance3D" parent="."]
+[node name="FrontWall" parent="Buildings/Building1/9aSection2" index="1"]
+material_overlay = SubResource("ShaderMaterial_bo5uc")
+
+[node name="DvornikDoor" parent="Buildings/Building1/9aSection2/Entrance" index="4"]
+mesh = SubResource("PlaneMesh_nivo5")
+
+[node name="9aSide" parent="Buildings/Building1" instance=ExtResource("5_fpyoq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.5, 0, 0)
+
+[node name="Bordur" type="Node3D" parent="."]
+
+[node name="Bordur" type="MeshInstance3D" parent="Bordur"]
 transform = Transform3D(-7.34618, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.130634, 12.6097)
 material_override = SubResource("StandardMaterial3D_2ftdi")
 mesh = SubResource("BoxMesh_yd8p4")
+skeleton = NodePath("../..")
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0, 0)
@@ -107,3 +141,23 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212719, 0)
 shape = SubResource("BoxShape3D_v8wjp")
+
+[node name="DeliveryBasementEntrance" parent="." node_paths=PackedStringArray("scene_from") instance=ExtResource("4_bmw10")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.68405, 0.0422816, 5.57368)
+scene_from = NodePath("..")
+save_spawnpoint_name = "1"
+locked = false
+
+[node name="DeliveryBasementEntrance2" parent="." node_paths=PackedStringArray("scene_from") instance=ExtResource("4_bmw10")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -19.684, 0.0422816, 5.57368)
+scene_from = NodePath("..")
+save_spawnpoint_name = "2"
+locked = false
+
+[node name="DeliveryBasementEntrance3" parent="." node_paths=PackedStringArray("scene_from") instance=ExtResource("4_bmw10")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -29.684, 0.0422816, 5.57368)
+scene_from = NodePath("..")
+save_spawnpoint_name = "3"
+locked = false
+
+[editable path="Buildings/Building1/9aSection2"]
