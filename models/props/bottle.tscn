@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqd148bm4xblb"]
+
+[ext_resource type="Script" path="res://src/props/prop_fx.gd" id="1_0bdk6"]
+[ext_resource type="AudioStream" uid="uid://chwae56e65ns6" path="res://audio/surfaces/glass/bowl dropped and breaks on tile floor 2.wav" id="2_wc7jv"]
+[ext_resource type="AudioStream" uid="uid://dn5lbdb05esnr" path="res://audio/surfaces/glass/glass ding 4.wav" id="3_xwk0h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u1kyo"]
+transparency = 1
+albedo_color = Color(1, 0.713726, 0.509804, 0.713726)
+metallic = 0.65
+metallic_specular = 1.0
+roughness = 0.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p4xgc"]
+material = SubResource("StandardMaterial3D_u1kyo")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_brecl"]
+material = SubResource("StandardMaterial3D_u1kyo")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.15
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fl6l3"]
+height = 0.45
+radius = 0.1
+
+[node name="Bottle" type="RigidBody3D" groups=["Grabables"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+
+[node name="Cylinder" type="MeshInstance3D" parent="."]
+gi_mode = 2
+mesh = SubResource("CylinderMesh_p4xgc")
+
+[node name="Neck" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.225, 0)
+mesh = SubResource("CylinderMesh_brecl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
+shape = SubResource("CylinderShape3D_fl6l3")
+
+[node name="PropFX" type="AudioStreamPlayer3D" parent="."]
+script = ExtResource("1_0bdk6")
+break_speed = 5.0
+velocities = Array[float]([5.0, 0.1])
+sounds = Array[AudioStream]([ExtResource("2_wc7jv"), ExtResource("3_xwk0h")])

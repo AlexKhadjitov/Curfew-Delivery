@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cuhwca406f2ns"]
+[gd_scene load_steps=27 format=3 uid="uid://cuhwca406f2ns"]
 
 [ext_resource type="PackedScene" uid="uid://blhsdt7p77ph7" path="res://models/buildings/panel_buildings/9a_section.tscn" id="1_d653t"]
 [ext_resource type="Script" path="res://src/player_spawner.gd" id="1_ypmij"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://x6p5ftktastk" path="res://models/buildings/delivery_basement_entrance.tscn" id="4_bmw10"]
 [ext_resource type="Texture2D" uid="uid://bcl04q775yd8v" path="res://textures/panel_buildings/panel9_frontwall.png" id="4_olgws"]
 [ext_resource type="PackedScene" uid="uid://cjuv4tc57xttc" path="res://models/buildings/panel_buildings/9a_side.tscn" id="5_fpyoq"]
+[ext_resource type="PackedScene" uid="uid://dqd148bm4xblb" path="res://models/props/bottle.tscn" id="9_fwy2y"]
+[ext_resource type="PackedScene" uid="uid://cw05jkfj15rf" path="res://models/props/soccer_ball.tscn" id="10_fgw6v"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rq7mv"]
 sky_top_color = Color(0.054902, 0.0862745, 0.129412, 1)
@@ -84,10 +86,10 @@ texture_filter = 0
 size = Vector3(7.12, 0.3, 0.205)
 
 [sub_resource type="BoxMesh" id="BoxMesh_73imj"]
-size = Vector3(40, 0.5, 25)
+size = Vector3(60, 0.5, 25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_v8wjp"]
-size = Vector3(40, 0.51, 25)
+size = Vector3(62, 0.51, 25)
 
 [node name="City" type="Node3D"]
 
@@ -100,7 +102,7 @@ shadow_enabled = true
 environment = SubResource("Environment_kio6l")
 
 [node name="PlayerSpawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -5)
 script = ExtResource("1_ypmij")
 
 [node name="Buildings" type="Node3D" parent="."]
@@ -143,7 +145,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212719, 0)
 shape = SubResource("BoxShape3D_v8wjp")
 
 [node name="DeliveryBasementEntrance" parent="." node_paths=PackedStringArray("scene_from") instance=ExtResource("4_bmw10")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.68405, 0.0422816, 5.57368)
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 10.316, 0.0422816, -4.42632)
 scene_from = NodePath("..")
 save_spawnpoint_name = "1"
 locked = false
@@ -159,5 +161,11 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -29.68
 scene_from = NodePath("..")
 save_spawnpoint_name = "3"
 locked = false
+
+[node name="Bottle" parent="." instance=ExtResource("9_fwy2y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1422, 0.184431, 10.6203)
+
+[node name="SoccerBall" parent="." instance=ExtResource("10_fgw6v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0953, 0.286096, 10.1419)
 
 [editable path="Buildings/Building1/9aSection2"]

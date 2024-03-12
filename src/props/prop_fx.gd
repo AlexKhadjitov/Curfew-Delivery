@@ -24,9 +24,7 @@ func body_entered(body):
 			play()
 			break
 
-	print(body)
 	if "velocities" in body and "sounds" in body and body.velocities != [] and body.sounds != []:
-		print(body)
 		for i in len(body.velocities):
 			if prop_body.linear_velocity.length() + prop_body.angular_velocity.length()/2 >= body.velocities[i]:
 				stream = body.sounds[i]

@@ -21,7 +21,7 @@ void fragment() {
 	panel_coord = floor(panel_coord);
 	
 	//ALBEDO.rg = panel_coord;
-	if(panel_coord.x >= 0.){
+	//if(panel_coord.x >= 0.){
 		vec2 uv = UV;
 		uv.x *= x_panels;
 		uv.y *= y_panels;
@@ -37,7 +37,10 @@ void fragment() {
 		uv.y += ceil(texture(rand, panel_coord/7.).r*100. + world_pos_offset) * 1./texture_y_variations;
 		
 		ALBEDO.rgb = texture(wall_texture, uv).rgb;
-	}
+		if (texture(wall_texture, uv).rgb == vec3(1,1,0)){
+			EMISSION.rgb = texture(wall_texture, uv).rgb*2.;
+		}
+	//}
 }
 
 void light() {
