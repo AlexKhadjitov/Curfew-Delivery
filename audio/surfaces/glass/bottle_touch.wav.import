@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dn5lbdb05esnr"
-path="res://.godot/imported/glass ding 4.wav-470601e2186e08915096161cfb20df86.sample"
+path="res://.godot/imported/bottle_touch.wav-33f6a6c6b9274e4fe8e3f67d6d6eaae5.sample"
 
 [deps]
 
-source_file="res://audio/surfaces/glass/glass ding 4.wav"
-dest_files=["res://.godot/imported/glass ding 4.wav-470601e2186e08915096161cfb20df86.sample"]
+source_file="res://audio/surfaces/glass/bottle_touch.wav"
+dest_files=["res://.godot/imported/bottle_touch.wav-33f6a6c6b9274e4fe8e3f67d6d6eaae5.sample"]
 
 [params]
 

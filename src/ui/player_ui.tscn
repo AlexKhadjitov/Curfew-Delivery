@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bc7rs5v237ud7"]
+[gd_scene load_steps=9 format=3 uid="uid://bc7rs5v237ud7"]
 
 [ext_resource type="Script" path="res://src/ui/player_ui.gd" id="1_ksw1e"]
 [ext_resource type="Script" path="res://src/ui/stamina_bar.gd" id="1_vgvyo"]
 [ext_resource type="Texture2D" uid="uid://br1sygra7qyms" path="res://textures/ui/crosshair.png" id="2_vch4s"]
+[ext_resource type="Script" path="res://src/ui/disguised_vignette.gd" id="4_guiqd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qdm2x"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -21,6 +22,17 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5m4h2"]
 bg_color = Color(1, 1, 1, 1)
 corner_detail = 1
+
+[sub_resource type="Gradient" id="Gradient_5khsf"]
+offsets = PackedFloat32Array(0.796178, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.345098)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qnprx"]
+gradient = SubResource("Gradient_5khsf")
+width = 240
+height = 135
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="PlayerUI" type="Control"]
 layout_mode = 3
@@ -74,3 +86,22 @@ offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_vch4s")
+
+[node name="DisguisedVignette" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_guiqd")
+
+[node name="TextureRect" type="TextureRect" parent="DisguisedVignette"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_qnprx")

@@ -25,6 +25,7 @@ enum State {
 
 var state: State = State.Walking
 var crouching = false
+var disguised: bool = false
 
 var speed
 var jump_velocity

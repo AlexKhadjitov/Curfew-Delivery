@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dqd148bm4xblb"]
 
 [ext_resource type="Script" path="res://src/props/prop_fx.gd" id="1_0bdk6"]
-[ext_resource type="AudioStream" uid="uid://chwae56e65ns6" path="res://audio/surfaces/glass/bowl dropped and breaks on tile floor 2.wav" id="2_wc7jv"]
-[ext_resource type="AudioStream" uid="uid://dn5lbdb05esnr" path="res://audio/surfaces/glass/glass ding 4.wav" id="3_xwk0h"]
+[ext_resource type="AudioStream" uid="uid://chwae56e65ns6" path="res://audio/surfaces/glass/bottle_break.wav" id="2_xcala"]
+[ext_resource type="AudioStream" uid="uid://dn5lbdb05esnr" path="res://audio/surfaces/glass/bottle_touch.wav" id="3_w7krm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u1kyo"]
 transparency = 1
@@ -46,4 +46,4 @@ shape = SubResource("CylinderShape3D_fl6l3")
 script = ExtResource("1_0bdk6")
 break_speed = 5.0
 velocities = Array[float]([5.0, 0.1])
-sounds = Array[AudioStream]([ExtResource("2_wc7jv"), ExtResource("3_xwk0h")])
+sounds = Array[AudioStream]([ExtResource("2_xcala"), ExtResource("3_w7krm")])

@@ -24,6 +24,7 @@ func interact():
         DialougeManager.get_dialouge("intro_dialouge").on_end.connect(on_intro_dialouge_end)
 
 func play_voice():
+    voice_player.pitch_scale = 1 - (randf()-0.5)/5
     voice_player.play()
 
 func on_intro_dialouge_end():

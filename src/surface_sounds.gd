@@ -1,4 +1,10 @@
-extends StaticBody3D
+extends Node
 
-@export var velocities: Array[float]
-@export var sounds: Array[AudioStream]
+
+var default_step_sound: AudioStream
+var glass_step_sound: AudioStream
+
+func get_step_sound(group_name: String) -> AudioStream:
+    if group_name == "Glass":
+        return glass_step_sound
+    return default_step_sound

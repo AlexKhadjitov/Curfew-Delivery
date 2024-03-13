@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnq2w2komw1pk"]
+[gd_scene load_steps=4 format=3 uid="uid://cnq2w2komw1pk"]
 
 [ext_resource type="PackedScene" uid="uid://c8w3ifhv0dd3b" path="res://models/trees/leaves/leaves1.tscn" id="1_4jnxr"]
+[ext_resource type="Script" path="res://src/disguise_area.gd" id="2_fsyjj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1unk7"]
+size = Vector3(1.5, 1, 1.5)
 
 [node name="Bush1" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -13,3 +17,11 @@ transform = Transform3D(0.5, 0.836516, 0.224144, 0, 0.258819, -0.965926, -0.8660
 
 [node name="Leaves3" parent="." instance=ExtResource("1_4jnxr")]
 transform = Transform3D(-0.707107, 0.683013, 0.183013, -7.45058e-09, 0.258819, -0.965926, -0.707107, -0.683013, -0.183013, 0.208318, 0, -0.0703511)
+
+[node name="DisguiseArea" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("2_fsyjj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DisguiseArea"]
+shape = SubResource("BoxShape3D_1unk7")

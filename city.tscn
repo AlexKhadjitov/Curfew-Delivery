@@ -15,11 +15,14 @@
 [ext_resource type="PackedScene" uid="uid://c0t44cm7iwyow" path="res://models/trees/ready/dead_tree_b.tscn" id="12_wxcfl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rq7mv"]
-sky_top_color = Color(0.054902, 0.0862745, 0.129412, 1)
-sky_horizon_color = Color(0.568627, 0.454902, 0.27451, 1)
-sky_curve = 0.046168
+sky_top_color = Color(0.027451, 0.0470588, 0.0823529, 1)
+sky_horizon_color = Color(0.462745, 0.364706, 0.211765, 1)
+sky_curve = 0.0208044
+sky_energy_multiplier = 0.5
 ground_bottom_color = Color(0, 0, 0, 1)
-ground_horizon_color = Color(0.568627, 0.454902, 0.27451, 1)
+ground_horizon_color = Color(0.462745, 0.364706, 0.211765, 1)
+ground_curve = 0.00999998
+ground_energy_multiplier = 0.5
 
 [sub_resource type="Sky" id="Sky_7lyec"]
 sky_material = SubResource("ProceduralSkyMaterial_rq7mv")
@@ -27,10 +30,13 @@ sky_material = SubResource("ProceduralSkyMaterial_rq7mv")
 [sub_resource type="Environment" id="Environment_kio6l"]
 background_mode = 2
 sky = SubResource("Sky_7lyec")
+reflected_light_source = 2
 tonemap_mode = 2
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_read_sky_light = false
 glow_enabled = true
 
 [sub_resource type="Gradient" id="Gradient_f4cp3"]

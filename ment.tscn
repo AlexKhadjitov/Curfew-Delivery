@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://8eo7ielpdyxb"]
+
+[ext_resource type="Script" path="res://src/ment/ment.gd" id="1_lc13j"]
+[ext_resource type="Material" uid="uid://c68mdut26einw" path="res://materials/ment.tres" id="2_q3ner"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_k15fa"]
+radius = 0.25
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5877c"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_4gkm2"]
+radius = 0.1
+height = 0.2
+
+[node name="Ment" type="CharacterBody3D"]
+floor_max_angle = 1.0472
+script = ExtResource("1_lc13j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_k15fa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("2_q3ner")
+mesh = SubResource("CylinderMesh_5877c")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+
+[node name="DebugSphere" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+visible = false
+mesh = SubResource("SphereMesh_4gkm2")
+
+[node name="PlayerDistanceChecker" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+debug_shape_custom_color = Color(0, 0, 0.752941, 1)
+debug_shape_thickness = 3

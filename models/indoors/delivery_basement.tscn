@@ -380,7 +380,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9721)
 script = ExtResource("10_rwf3u")
 intro_dialouge = Array[String](["Hello there!", "I know, i didn't explain job details on the phone, so I'll explain them now.", "I'm an acquaintance of head of city's delivery system.
 When city authorities announced emergency regime, they obviously ordered delivery system to stop. But emergency regime already lasts too long, so people are getting hungry.", "And that's the moment, when we step onto the scene!", "The job is simple - i tell you addres of client, you take order to client, take money and give them their order.
-For now orders will be mostly food, but it is not the only thing people order."])
+For now orders will be mostly food, but it is not the only thing people order.", "OH, by the way, police were pretty serious about this, so they set up robots to patrol streets, so be wary"])
 
 [node name="EmployerEyes" type="Sprite3D" parent="Employer" node_paths=PackedStringArray("speaking_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0.5)
