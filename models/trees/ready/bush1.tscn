@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnq2w2komw1pk"]
+
+[ext_resource type="PackedScene" uid="uid://c8w3ifhv0dd3b" path="res://models/trees/leaves/leaves1.tscn" id="1_4jnxr"]
+
+[node name="Bush1" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Leaves1" parent="." instance=ExtResource("1_4jnxr")]
+transform = Transform3D(1, 0, 0, 0, 0.258819, -0.965926, 0, 0.965926, 0.258819, 0, 0, 0)
+
+[node name="Leaves2" parent="." instance=ExtResource("1_4jnxr")]
+transform = Transform3D(0.5, 0.836516, 0.224144, 0, 0.258819, -0.965926, -0.866025, 0.482963, 0.12941, 0, 0, 0)
+
+[node name="Leaves3" parent="." instance=ExtResource("1_4jnxr")]
+transform = Transform3D(-0.707107, 0.683013, 0.183013, -7.45058e-09, 0.258819, -0.965926, -0.707107, -0.683013, -0.183013, 0.208318, 0, -0.0703511)

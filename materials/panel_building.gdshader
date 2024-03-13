@@ -40,6 +40,9 @@ void fragment() {
 		if (texture(wall_texture, uv).rgb == vec3(1,1,0)){
 			EMISSION.rgb = texture(wall_texture, uv).rgb*2.;
 		}
+		if (texture(wall_texture, uv).rgb == vec3(1,0,1)){
+			EMISSION.rgb = texture(wall_texture, uv).rgb*2.;
+		}
 	//}
 }
 

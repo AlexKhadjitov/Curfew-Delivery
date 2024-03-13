@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5haim2drcru1"]
+
+[ext_resource type="Texture2D" uid="uid://dn2cj86a4c44g" path="res://models/trees/leaves/2.png" id="1_u50ti"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3ohl"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.623529, 0.415686, 0.278431, 1)
+albedo_texture = ExtResource("1_u50ti")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_offset = Vector3(0.5, 0, 0.5)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gdg3j"]
+size = Vector2(4, 4)
+
+[node name="Leaves2" type="MeshInstance3D"]
+material_override = SubResource("StandardMaterial3D_b3ohl")
+mesh = SubResource("PlaneMesh_gdg3j")

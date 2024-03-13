@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://i20qdd13ib3g"]
+
+[ext_resource type="Material" uid="uid://dbcsevfu8wklr" path="res://materials/snow.tres" id="1_hg01v"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yopir"]
+size = Vector3(4, 1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xxox2"]
+material = ExtResource("1_hg01v")
+size = Vector3(4, 1, 10)
+
+[node name="SnowStrip" type="StaticBody3D"]
+
+[node name="BaseCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_yopir")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_xxox2")

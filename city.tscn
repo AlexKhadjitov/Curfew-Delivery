@@ -1,15 +1,18 @@
-[gd_scene load_steps=27 format=3 uid="uid://cuhwca406f2ns"]
+[gd_scene load_steps=22 format=3 uid="uid://cuhwca406f2ns"]
 
 [ext_resource type="PackedScene" uid="uid://blhsdt7p77ph7" path="res://models/buildings/panel_buildings/9a_section.tscn" id="1_d653t"]
 [ext_resource type="Script" path="res://src/player_spawner.gd" id="1_ypmij"]
-[ext_resource type="Material" uid="uid://cfgo14n0x0i6g" path="res://materials/road.tres" id="2_a1wg8"]
+[ext_resource type="PackedScene" uid="uid://d1luf3i7kikjs" path="res://models/forest_border_section.tscn" id="2_dkbjw"]
 [ext_resource type="Shader" path="res://materials/panel_building.gdshader" id="3_qus8l"]
-[ext_resource type="Texture2D" uid="uid://8x8rtkw1iso8" path="res://textures/bordur.png" id="3_ysrih"]
 [ext_resource type="PackedScene" uid="uid://x6p5ftktastk" path="res://models/buildings/delivery_basement_entrance.tscn" id="4_bmw10"]
 [ext_resource type="Texture2D" uid="uid://bcl04q775yd8v" path="res://textures/panel_buildings/panel9_frontwall.png" id="4_olgws"]
 [ext_resource type="PackedScene" uid="uid://cjuv4tc57xttc" path="res://models/buildings/panel_buildings/9a_side.tscn" id="5_fpyoq"]
+[ext_resource type="PackedScene" uid="uid://bvmuahmrjbd2y" path="res://models/building_connections/L-connection.tscn" id="6_gotas"]
+[ext_resource type="PackedScene" uid="uid://vnadrhxf2j48" path="res://models/building_connections/alley-connecion.tscn" id="6_ifkew"]
 [ext_resource type="PackedScene" uid="uid://dqd148bm4xblb" path="res://models/props/bottle.tscn" id="9_fwy2y"]
 [ext_resource type="PackedScene" uid="uid://cw05jkfj15rf" path="res://models/props/soccer_ball.tscn" id="10_fgw6v"]
+[ext_resource type="PackedScene" uid="uid://2pthcq51ouxk" path="res://models/trees/ready/dead_tree_a.tscn" id="11_onuf6"]
+[ext_resource type="PackedScene" uid="uid://c0t44cm7iwyow" path="res://models/trees/ready/dead_tree_b.tscn" id="12_wxcfl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rq7mv"]
 sky_top_color = Color(0.054902, 0.0862745, 0.129412, 1)
@@ -55,42 +58,6 @@ shader_parameter/rand = SubResource("NoiseTexture2D_ma06n")
 resource_local_to_scene = true
 size = Vector2(1.5, 2.5)
 
-[sub_resource type="Gradient" id="Gradient_7uptj"]
-offsets = PackedFloat32Array(0, 0.259124, 1)
-colors = PackedColorArray(0.14, 0.13216, 0.1204, 1, 0, 0, 0, 0.721569, 0.41, 0.3198, 0.246, 0.521569)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_n1hq6"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wvw31"]
-width = 256
-height = 256
-seamless = true
-color_ramp = SubResource("Gradient_7uptj")
-noise = SubResource("FastNoiseLite_n1hq6")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkv2t"]
-transparency = 1
-albedo_texture = SubResource("NoiseTexture2D_wvw31")
-uv1_triplanar = true
-uv1_world_triplanar = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ftdi"]
-next_pass = SubResource("StandardMaterial3D_gkv2t")
-albedo_texture = ExtResource("3_ysrih")
-uv1_scale = Vector3(0.44, 1, 1)
-uv1_triplanar = true
-uv1_world_triplanar = true
-texture_filter = 0
-
-[sub_resource type="BoxMesh" id="BoxMesh_yd8p4"]
-size = Vector3(7.12, 0.3, 0.205)
-
-[sub_resource type="BoxMesh" id="BoxMesh_73imj"]
-size = Vector3(60, 0.5, 25)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_v8wjp"]
-size = Vector3(62, 0.51, 25)
-
 [node name="City" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -101,9 +68,41 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kio6l")
 
+[node name="Ambient" type="AudioStreamPlayer" parent="."]
+bus = &"Ambient"
+
 [node name="PlayerSpawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -5)
 script = ExtResource("1_ypmij")
+
+[node name="Border" type="Node3D" parent="."]
+
+[node name="ForestBorderSection" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 34, 0, -20)
+
+[node name="ForestBorderSection6" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 49.5, 0, -4)
+
+[node name="ForestBorderSection7" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 49.5, 0, 26)
+
+[node name="ForestBorderSection8" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 49.5, 0, 56)
+
+[node name="ForestBorderSection9" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 49.5, 0, 86)
+
+[node name="ForestBorderSection2" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, -20)
+
+[node name="ForestBorderSection3" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -26, 0, -20)
+
+[node name="ForestBorderSection4" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -56, 0, -20)
+
+[node name="ForestBorderSection5" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -85, 0, -20)
 
 [node name="Buildings" type="Node3D" parent="."]
 
@@ -120,29 +119,56 @@ material_overlay = SubResource("ShaderMaterial_bo5uc")
 [node name="DvornikDoor" parent="Buildings/Building1/9aSection2/Entrance" index="4"]
 mesh = SubResource("PlaneMesh_nivo5")
 
+[node name="9aSection3" parent="Buildings/Building1" instance=ExtResource("1_d653t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 0)
+
+[node name="FrontWall" parent="Buildings/Building1/9aSection3" index="1"]
+material_overlay = SubResource("ShaderMaterial_bo5uc")
+
+[node name="DvornikDoor" parent="Buildings/Building1/9aSection3/Entrance" index="4"]
+mesh = SubResource("PlaneMesh_nivo5")
+
+[node name="9aSection4" parent="Buildings/Building1" instance=ExtResource("1_d653t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63, 0, 0)
+
+[node name="FrontWall" parent="Buildings/Building1/9aSection4" index="1"]
+material_overlay = SubResource("ShaderMaterial_bo5uc")
+
+[node name="DvornikDoor" parent="Buildings/Building1/9aSection4/Entrance" index="4"]
+mesh = SubResource("PlaneMesh_nivo5")
+
+[node name="AlleyConnecion" parent="Buildings/Building1" instance=ExtResource("6_ifkew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78, 0, 0)
+
+[node name="9aSection5" parent="Buildings/Building1" instance=ExtResource("1_d653t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93, 0, 0)
+
+[node name="FrontWall" parent="Buildings/Building1/9aSection5" index="1"]
+material_overlay = SubResource("ShaderMaterial_bo5uc")
+
+[node name="DvornikDoor" parent="Buildings/Building1/9aSection5/Entrance" index="4"]
+mesh = SubResource("PlaneMesh_nivo5")
+
 [node name="9aSide" parent="Buildings/Building1" instance=ExtResource("5_fpyoq")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.5, 0, 0)
 
-[node name="Bordur" type="Node3D" parent="."]
+[node name="Building2" type="Node3D" parent="Buildings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 45.5)
 
-[node name="Bordur" type="MeshInstance3D" parent="Bordur"]
-transform = Transform3D(-7.34618, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.130634, 12.6097)
-material_override = SubResource("StandardMaterial3D_2ftdi")
-mesh = SubResource("BoxMesh_yd8p4")
-skeleton = NodePath("../..")
+[node name="9aSection" parent="Buildings/Building2" instance=ExtResource("1_d653t")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -16)
 
-[node name="Ground" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0, 0)
+[node name="9aSection2" parent="Buildings/Building2" instance=ExtResource("1_d653t")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 5)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-material_override = ExtResource("2_a1wg8")
-mesh = SubResource("BoxMesh_73imj")
-skeleton = NodePath("../..")
+[node name="9aSide" parent="Buildings/Building2" instance=ExtResource("5_fpyoq")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -26.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.212719, 0)
-shape = SubResource("BoxShape3D_v8wjp")
+[node name="9aSide2" parent="Buildings/Building2" instance=ExtResource("5_fpyoq")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 15.5)
+
+[node name="1-2-L-connection" parent="Buildings" instance=ExtResource("6_gotas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 0)
 
 [node name="DeliveryBasementEntrance" parent="." node_paths=PackedStringArray("scene_from") instance=ExtResource("4_bmw10")]
 transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 10.316, 0.0422816, -4.42632)
@@ -168,4 +194,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.1422, 0.184431, 10.6203)
 [node name="SoccerBall" parent="." instance=ExtResource("10_fgw6v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0953, 0.286096, 10.1419)
 
+[node name="Trees" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 40)
+
+[node name="DeadTreeA" parent="Trees" instance=ExtResource("11_onuf6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.37383, -0.286148, -12.955)
+
+[node name="DeadTreeB" parent="." instance=ExtResource("12_wxcfl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0414, 0, 29.5772)
+
 [editable path="Buildings/Building1/9aSection2"]
+[editable path="Buildings/Building1/9aSection3"]
+[editable path="Buildings/Building1/9aSection4"]
+[editable path="Buildings/Building1/9aSection5"]

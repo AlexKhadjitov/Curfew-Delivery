@@ -1,16 +1,18 @@
-[gd_scene load_steps=41 format=3 uid="uid://blhsdt7p77ph7"]
+[gd_scene load_steps=59 format=3 uid="uid://blhsdt7p77ph7"]
 
 [ext_resource type="Shader" path="res://materials/panel_building.gdshader" id="1_lfiyr"]
 [ext_resource type="Texture2D" uid="uid://bcl04q775yd8v" path="res://textures/panel_buildings/panel9_frontwall.png" id="2_y6ayj"]
-[ext_resource type="Texture2D" uid="uid://bsib741m1odxx" path="res://textures/panel_buildings/panel9_backwall.png" id="3_eta7y"]
 [ext_resource type="Texture2D" uid="uid://ct02xtdielmxf" path="res://textures/panel_buildings/panel9_under.png" id="4_7fcbu"]
 [ext_resource type="Texture2D" uid="uid://dljbwvpjjvjml" path="res://textures/panel_buildings/cell.png" id="4_vxqpo"]
 [ext_resource type="PackedScene" uid="uid://cr0jvddy3xtqg" path="res://models/buildings/panel_buildings/9a_balconies.tscn" id="5_gkf7y"]
 [ext_resource type="Texture2D" uid="uid://c2h5noiuycy0j" path="res://textures/SBS - Tiny Texture Pack 2 - 128x128/128x128/Metal/Metal_10-128x128.png" id="5_qbgko"]
 [ext_resource type="Texture2D" uid="uid://e6sjtuu6wg1x" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Stone/Stone_06-128x128.png" id="7_4xi0o"]
 [ext_resource type="Script" path="res://src/surface_sounds.gd" id="8_jvr8u"]
+[ext_resource type="Material" uid="uid://cfgo14n0x0i6g" path="res://materials/road.tres" id="9_7u1ru"]
 [ext_resource type="Script" path="res://src/door.gd" id="9_g1nls"]
 [ext_resource type="AudioStream" uid="uid://chwae56e65ns6" path="res://audio/surfaces/glass/bowl dropped and breaks on tile floor 2.wav" id="9_k0hb4"]
+[ext_resource type="Texture2D" uid="uid://8x8rtkw1iso8" path="res://textures/bordur.png" id="10_vlvfe"]
+[ext_resource type="Material" uid="uid://dbcsevfu8wklr" path="res://materials/snow.tres" id="11_4gpcq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vofw7"]
 size = Vector3(21, 28, 12)
@@ -44,9 +46,9 @@ render_priority = 0
 shader = ExtResource("1_lfiyr")
 shader_parameter/x_panels = 7.0
 shader_parameter/y_panels = 9.0
-shader_parameter/texture_x_variations = 7.0
-shader_parameter/texture_y_variations = 1.0
-shader_parameter/wall_texture = ExtResource("3_eta7y")
+shader_parameter/texture_x_variations = -7.0
+shader_parameter/texture_y_variations = 4.0
+shader_parameter/wall_texture = ExtResource("2_y6ayj")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vqpiy"]
 size = Vector2(21, 27)
@@ -142,6 +144,67 @@ size = Vector3(4, 0.149609, 3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bnce6"]
 size = Vector3(0.2, 3, 2.25)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4goaj"]
+size = Vector3(21, 0.5, 26)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_phlds"]
+size = Vector3(21, 0.5, 26)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nkkma"]
+material = ExtResource("9_7u1ru")
+size = Vector3(21, 0.5, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uppap"]
+size = Vector3(21, 0.5, 6)
+
+[sub_resource type="Gradient" id="Gradient_a73u5"]
+offsets = PackedFloat32Array(0, 0.259124, 1)
+colors = PackedColorArray(0.14, 0.13216, 0.1204, 1, 0, 0, 0, 0.721569, 0.41, 0.3198, 0.246, 0.521569)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_iqik1"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3b181"]
+width = 256
+height = 256
+seamless = true
+color_ramp = SubResource("Gradient_a73u5")
+noise = SubResource("FastNoiseLite_iqik1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dh60h"]
+transparency = 1
+albedo_texture = SubResource("NoiseTexture2D_3b181")
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p4ouj"]
+next_pass = SubResource("StandardMaterial3D_dh60h")
+albedo_texture = ExtResource("10_vlvfe")
+uv1_scale = Vector3(0.44, 1, 1)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_8d43m"]
+size = Vector3(21, 0.4, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oy73s"]
+size = Vector3(21, 0.25, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nxwgv"]
+size = Vector3(21, 0.25, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uotef"]
+size = Vector3(9, 0.25, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dobrx"]
+size = Vector3(9, 0.25, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b7lvr"]
+size = Vector3(5, 0.25, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hbd0e"]
+size = Vector3(5, 0.25, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4sew6"]
 size = Vector3(1, 1.25, 12.1)
@@ -242,6 +305,90 @@ shape = SubResource("BoxShape3D_7mqut")
 [node name="Support" type="CollisionShape3D" parent="Entrance/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 1.7, 1.383)
 shape = SubResource("BoxShape3D_bnce6")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+material_override = ExtResource("9_7u1ru")
+mesh = SubResource("BoxMesh_4goaj")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_phlds")
+
+[node name="RoadFront" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 16)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RoadFront"]
+mesh = SubResource("BoxMesh_nkkma")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoadFront"]
+shape = SubResource("BoxShape3D_uppap")
+
+[node name="Bordur" type="MeshInstance3D" parent="RoadFront"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41, -3)
+material_override = SubResource("StandardMaterial3D_p4ouj")
+mesh = SubResource("BoxMesh_8d43m")
+skeleton = NodePath("../..")
+
+[node name="Bordur2" type="MeshInstance3D" parent="RoadFront"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41, 3)
+material_override = SubResource("StandardMaterial3D_p4ouj")
+mesh = SubResource("BoxMesh_8d43m")
+skeleton = NodePath("../..")
+
+[node name="RoadBack" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, -16)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RoadBack"]
+mesh = SubResource("BoxMesh_nkkma")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoadBack"]
+shape = SubResource("BoxShape3D_uppap")
+
+[node name="Bordur" type="MeshInstance3D" parent="RoadBack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41, -3)
+material_override = SubResource("StandardMaterial3D_p4ouj")
+mesh = SubResource("BoxMesh_8d43m")
+skeleton = NodePath("../..")
+
+[node name="Bordur2" type="MeshInstance3D" parent="RoadBack"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41, 3)
+material_override = SubResource("StandardMaterial3D_p4ouj")
+mesh = SubResource("BoxMesh_8d43m")
+skeleton = NodePath("../..")
+
+[node name="SnowBack" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnowBack"]
+shape = SubResource("BoxShape3D_oy73s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SnowBack"]
+material_override = ExtResource("11_4gpcq")
+mesh = SubResource("BoxMesh_nxwgv")
+
+[node name="SnowFront" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnowFront"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+shape = SubResource("BoxShape3D_uotef")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SnowFront"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+material_override = ExtResource("11_4gpcq")
+mesh = SubResource("BoxMesh_dobrx")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="SnowFront"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+shape = SubResource("BoxShape3D_b7lvr")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SnowFront"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+material_override = ExtResource("11_4gpcq")
+mesh = SubResource("BoxMesh_hbd0e")
 
 [node name="GlassSounds" type="StaticBody3D" parent="."]
 script = ExtResource("8_jvr8u")

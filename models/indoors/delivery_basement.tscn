@@ -1,6 +1,7 @@
-[gd_scene load_steps=53 format=3 uid="uid://nkflkqse5nef"]
+[gd_scene load_steps=54 format=3 uid="uid://nkflkqse5nef"]
 
 [ext_resource type="Texture2D" uid="uid://e6sjtuu6wg1x" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Stone/Stone_06-128x128.png" id="1_844k1"]
+[ext_resource type="AudioStream" uid="uid://b0x3sfhu0tm7k" path="res://audio/ambient/Mellow_Ambient_Track.wav" id="1_mju1g"]
 [ext_resource type="Material" uid="uid://dg26602hdlop7" path="res://materials/basement_wall.tres" id="2_o0geh"]
 [ext_resource type="Texture2D" uid="uid://qqhqxo3r0sdc" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Stone/Stone_22-128x128.png" id="4_t3gu1"]
 [ext_resource type="Texture2D" uid="uid://qexobxpkoq0g" path="res://textures/kover2.png" id="5_xt4i8"]
@@ -151,6 +152,12 @@ size = Vector2(1, 2)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bxgc7")
+
+[node name="Ambient" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38066, 1.09174, 2.19933)
+stream = ExtResource("1_mju1g")
+volume_db = -8.648
+autoplay = true
 
 [node name="PlayerSpawner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)

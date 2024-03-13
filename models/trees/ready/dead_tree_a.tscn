@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://2pthcq51ouxk"]
+
+[ext_resource type="PackedScene" uid="uid://cqcf5pewq7akr" path="res://models/trees/FBX/DeadBirch_1.fbx" id="1_87snp"]
+[ext_resource type="PackedScene" uid="uid://c8w3ifhv0dd3b" path="res://models/trees/leaves/leaves1.tscn" id="2_2bjd0"]
+[ext_resource type="PackedScene" uid="uid://b5haim2drcru1" path="res://models/trees/leaves/leaves2.tscn" id="3_xopwl"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wrrdp"]
+height = 8.0
+
+[node name="DeadTreeA" type="Node3D"]
+
+[node name="Root Scene" parent="." instance=ExtResource("1_87snp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.322286, 0, 0.184525)
+
+[node name="Leaves1" parent="." instance=ExtResource("2_2bjd0")]
+transform = Transform3D(-0.101577, -0.594771, -0.797452, 0, 0.801598, -0.597863, 0.994828, -0.0607292, -0.0814241, -0.219489, 5.63737, 0.202393)
+
+[node name="Leaves3" parent="." instance=ExtResource("3_xopwl")]
+transform = Transform3D(0.852029, 0.518041, -0.0753709, 0, 0.143976, 0.989581, 0.523495, -0.843151, 0.122672, -0.213586, 6.99712, 0.175597)
+
+[node name="Leaves2" parent="." instance=ExtResource("2_2bjd0")]
+transform = Transform3D(0.866025, -0.433013, -0.25, 0, 0.5, -0.866025, 0.5, 0.75, 0.433013, -0.44223, 5, -0.168859)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+shape = SubResource("CylinderShape3D_wrrdp")

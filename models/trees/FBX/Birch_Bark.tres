@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bys8ox71v2ee8"]
+
+[ext_resource type="Texture2D" uid="uid://d0jmuu8xpsshv" path="res://textures/SBS - Tiny Texture Pack - 128x128/128x128/Wood/Wood_20-128x128.png" id="1_mesi2"]
+
+[resource]
+resource_name = "Birch_Bark"
+albedo_color = Color(0.823529, 0.823529, 0.823529, 1)
+albedo_texture = ExtResource("1_mesi2")
+metallic = 0.4
+uv1_scale = Vector3(14.805, 14.805, 14.805)
+uv1_triplanar = true
+texture_filter = 0

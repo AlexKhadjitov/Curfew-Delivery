@@ -32,6 +32,7 @@ noise = SubResource("FastNoiseLite_tu5p8")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mar8s"]
 transparency = 1
 albedo_texture = SubResource("NoiseTexture2D_k43ej")
+metallic_specular = 1.0
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_triplanar = true
 uv1_world_triplanar = true

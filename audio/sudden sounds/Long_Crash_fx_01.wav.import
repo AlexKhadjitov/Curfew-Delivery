@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://km7gxkwoastd"
+path="res://.godot/imported/Long_Crash_fx_01.wav-268313d19c6d4747eb2691a3f464f0d4.sample"
+
+[deps]
+
+source_file="res://audio/sudden sounds/Long_Crash_fx_01.wav"
+dest_files=["res://.godot/imported/Long_Crash_fx_01.wav-268313d19c6d4747eb2691a3f464f0d4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

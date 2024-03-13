@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbdfpfkpoo0m6"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_p7siq"]
+radius = 1.0
+radial_segments = 4
+rings = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6d2pr"]
+radius = 0.785744
+height = 2.01037
+
+[node name="SnowLumpBig" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_p7siq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_6d2pr")

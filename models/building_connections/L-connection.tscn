@@ -1,0 +1,192 @@
+[gd_scene load_steps=26 format=3 uid="uid://bvmuahmrjbd2y"]
+
+[ext_resource type="Material" uid="uid://cfgo14n0x0i6g" path="res://materials/road.tres" id="1_opaoy"]
+[ext_resource type="Material" uid="uid://dbcsevfu8wklr" path="res://materials/snow.tres" id="1_r0vf7"]
+[ext_resource type="Texture2D" uid="uid://8x8rtkw1iso8" path="res://textures/bordur.png" id="2_5c65d"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_p521j"]
+size = Vector3(26, 1, 32)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bro8m"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_fa5qk"]
+size = Vector3(26, 1, 26)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2p7wy"]
+
+[sub_resource type="Gradient" id="Gradient_7uptj"]
+offsets = PackedFloat32Array(0, 0.259124, 1)
+colors = PackedColorArray(0.14, 0.13216, 0.1204, 1, 0, 0, 0, 0.721569, 0.41, 0.3198, 0.246, 0.521569)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n1hq6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rymar"]
+width = 256
+height = 256
+seamless = true
+color_ramp = SubResource("Gradient_7uptj")
+noise = SubResource("FastNoiseLite_n1hq6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkv2t"]
+transparency = 1
+albedo_texture = SubResource("NoiseTexture2D_rymar")
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnn08"]
+next_pass = SubResource("StandardMaterial3D_gkv2t")
+albedo_texture = ExtResource("2_5c65d")
+uv1_scale = Vector3(0.44, 1, 1)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_24747"]
+size = Vector3(6, 0.4, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3n5f6"]
+size = Vector3(6, 0.4, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ttb3y"]
+size = Vector3(32, 0.4, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l3jgx"]
+size = Vector3(38, 0.4, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x73fk"]
+size = Vector3(32, 0.4, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qd0js"]
+material = ExtResource("1_opaoy")
+size = Vector3(38, 0.5, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tw0py"]
+size = Vector3(38, 0.5, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0bvrn"]
+material = ExtResource("1_opaoy")
+size = Vector3(26, 0.5, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vlfpr"]
+size = Vector3(26, 0.5, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xy7a5"]
+material = ExtResource("1_opaoy")
+size = Vector3(26, 0.5, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j4dh1"]
+size = Vector3(26, 0.5, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_abjt2"]
+material = ExtResource("1_opaoy")
+size = Vector3(6, 0.5, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b8tg8"]
+size = Vector3(6, 0.5, 6)
+
+[node name="L-connection" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
+mesh = SubResource("BoxMesh_p521j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_bro8m")
+
+[node name="Snow" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Snow"]
+material_override = ExtResource("1_r0vf7")
+mesh = SubResource("BoxMesh_fa5qk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Snow"]
+shape = SubResource("BoxShape3D_2p7wy")
+
+[node name="Bordurs" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.6, 0)
+
+[node name="Bordur" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 0.41, -16)
+material_override = SubResource("StandardMaterial3D_bnn08")
+mesh = SubResource("BoxMesh_24747")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur2" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0.41, -13)
+material_override = SubResource("StandardMaterial3D_bnn08")
+mesh = SubResource("BoxMesh_3n5f6")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur3" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.41, 13)
+material_override = SubResource("StandardMaterial3D_bnn08")
+mesh = SubResource("BoxMesh_ttb3y")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur4" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99382e-07, 0.41, 19)
+material_override = SubResource("StandardMaterial3D_bnn08")
+mesh = SubResource("BoxMesh_l3jgx")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur5" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 19, 0.41, 8.30516e-07)
+material_override = SubResource("StandardMaterial3D_bnn08")
+mesh = SubResource("BoxMesh_l3jgx")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur6" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 0.41, -3)
+material_override = SubResource("StandardMaterial3D_bnn08")
+mesh = SubResource("BoxMesh_x73fk")
+skeleton = NodePath("../../Ground")
+
+[node name="RoadOuter" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16, -0.6, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RoadOuter"]
+mesh = SubResource("BoxMesh_qd0js")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoadOuter"]
+shape = SubResource("BoxShape3D_tw0py")
+
+[node name="RoadInner" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -16, -0.25, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RoadInner"]
+mesh = SubResource("BoxMesh_0bvrn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoadInner"]
+shape = SubResource("BoxShape3D_vlfpr")
+
+[node name="RoadOuter2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, -16)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RoadOuter2"]
+mesh = SubResource("BoxMesh_qd0js")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoadOuter2"]
+shape = SubResource("BoxShape3D_tw0py")
+
+[node name="RoadInner2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 16)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RoadInner2"]
+mesh = SubResource("BoxMesh_xy7a5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoadInner2"]
+shape = SubResource("BoxShape3D_j4dh1")
+
+[node name="RoadQuad" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -0.6, 16)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RoadQuad"]
+mesh = SubResource("BoxMesh_abjt2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoadQuad"]
+shape = SubResource("BoxShape3D_b8tg8")
