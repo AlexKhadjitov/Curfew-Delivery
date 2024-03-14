@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bta6mfl6fxpfm"
-path="res://.godot/imported/Bore Blasters 21.ttf-28382bda042fe48298f6a74262240985.fontdata"
+path="res://.godot/imported/Bore Blasters 21.ttf-2fe0b1cffb7daea73dde46a10e9e29d6.fontdata"
 
 [deps]
 
-source_file="res://fons/Bore Blasters 21.ttf"
-dest_files=["res://.godot/imported/Bore Blasters 21.ttf-28382bda042fe48298f6a74262240985.fontdata"]
+source_file="res://fonts/Bore Blasters 21.ttf"
+dest_files=["res://.godot/imported/Bore Blasters 21.ttf-2fe0b1cffb7daea73dde46a10e9e29d6.fontdata"]
 
 [params]
 

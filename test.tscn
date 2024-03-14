@@ -90,7 +90,7 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mocj5")
 
-[node name="Spawnpoint" type="Node3D" parent="." groups=["Spanwpoints"]]
+[node name="Spawnpoint" type="Node3D" parent="." groups=["Spawnpoints"]]
 
 [node name="PlayerSpawner" type="Node3D" parent="."]
 script = ExtResource("1_mc5o1")
@@ -231,3 +231,10 @@ shape = SubResource("BoxShape3D_gx4a4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Wall/Window"]
 mesh = SubResource("BoxMesh_emjdy")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.34502, 4.6041, -10.8706)
+pixel_size = 0.025
+text = "You win1!!!
+Damn, i could so much more
+if i got more time"

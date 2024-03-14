@@ -31,6 +31,9 @@ func body_entered(body):
 				play()
 				break
 
+	if body is Ment:
+		body.state = Ment.State.WakingUp
+
 	if prop_body.linear_velocity.length() + prop_body.angular_velocity.length()/2 >= break_speed and break_speed != 0:
 		destroy()
 

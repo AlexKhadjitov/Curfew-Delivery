@@ -1,15 +1,32 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://pc0r07y5n5b6"]
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://pc0r07y5n5b6"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_qye5p"]
+resource_name = "Reverb"
+room_size = 0.59
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_0ahwe"]
+resource_name = "Delay"
 
 [resource]
-bus/1/name = &"Steps"
+bus/1/name = &"Inside"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = 0.0
+bus/1/volume_db = -0.130497
 bus/1/send = &"Master"
-bus/2/name = &"Ambient"
+bus/1/effect/0/effect = SubResource("AudioEffectReverb_qye5p")
+bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource("AudioEffectDelay_0ahwe")
+bus/1/effect/1/enabled = true
+bus/2/name = &"Steps"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = -3.11736
+bus/2/volume_db = 0.0
 bus/2/send = &"Master"
+bus/3/name = &"Ambient"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = -3.11736
+bus/3/send = &"Master"

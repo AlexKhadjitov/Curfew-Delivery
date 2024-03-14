@@ -42,8 +42,9 @@ func _physics_process(delta):
 		crouching = true
 	if not Input.is_action_pressed("crouch") and not crouch_checker.is_colliding():
 		crouching = false
+	
 	stamina = clampf(stamina, 0, max_stamina)
-	if Input.is_action_pressed("run") and stamina > 0:
+	if Input.is_action_pressed("run") and stamina > 0 and Input.get_vector("left", "right", "forward", "backward") != Vector2.ZERO:
 		state = State.Running
 	elif crouching:
 		state = State.Crouching

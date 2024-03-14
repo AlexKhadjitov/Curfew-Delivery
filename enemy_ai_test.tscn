@@ -83,18 +83,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 use_collision = true
 size = Vector3(100, 1, 100)
 
-[node name="Node3D" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4263, 0, -9.80177)
-
-[node name="Node3D3" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8401, 9.53674e-07, 1.94893)
-
 [node name="MentSpawner" type="Node3D" parent="."]
 script = ExtResource("2_8ck0u")
 fill_count = 1
 
 [node name="Node3D2" type="Node3D" parent="MentSpawner"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.405511, 0, -13.032)
+
+[node name="Node3D" type="Node3D" parent="MentSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4263, 0, -9.80177)
+
+[node name="Node3D3" type="Node3D" parent="MentSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8401, 9.53674e-07, 1.94893)
 
 [node name="Bush1" parent="." instance=ExtResource("3_tsgyi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18722, 0.999999, -7.3811)

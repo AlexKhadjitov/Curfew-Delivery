@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://cuhwca406f2ns"]
+[gd_scene load_steps=42 format=3 uid="uid://cuhwca406f2ns"]
 
 [ext_resource type="PackedScene" uid="uid://blhsdt7p77ph7" path="res://models/buildings/panel_buildings/9a_section.tscn" id="1_d653t"]
 [ext_resource type="Script" path="res://src/player_spawner.gd" id="1_ypmij"]
 [ext_resource type="PackedScene" uid="uid://d1luf3i7kikjs" path="res://models/forest_border_section.tscn" id="2_dkbjw"]
+[ext_resource type="PackedScene" uid="uid://0jit51b47olq" path="res://models/building_connections/end.tscn" id="2_g03b1"]
 [ext_resource type="Shader" path="res://materials/panel_building.gdshader" id="3_qus8l"]
 [ext_resource type="PackedScene" uid="uid://x6p5ftktastk" path="res://models/buildings/delivery_basement_entrance.tscn" id="4_bmw10"]
 [ext_resource type="Texture2D" uid="uid://bcl04q775yd8v" path="res://textures/panel_buildings/panel9_frontwall.png" id="4_olgws"]
@@ -13,31 +14,27 @@
 [ext_resource type="PackedScene" uid="uid://cw05jkfj15rf" path="res://models/props/soccer_ball.tscn" id="10_fgw6v"]
 [ext_resource type="PackedScene" uid="uid://2pthcq51ouxk" path="res://models/trees/ready/dead_tree_a.tscn" id="11_onuf6"]
 [ext_resource type="PackedScene" uid="uid://c0t44cm7iwyow" path="res://models/trees/ready/dead_tree_b.tscn" id="12_wxcfl"]
+[ext_resource type="Script" path="res://src/ment/ment_spawner.gd" id="14_g0w71"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rq7mv"]
-sky_top_color = Color(0.027451, 0.0470588, 0.0823529, 1)
-sky_horizon_color = Color(0.462745, 0.364706, 0.211765, 1)
-sky_curve = 0.0208044
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i07vo"]
+sky_top_color = Color(0.054902, 0.0784314, 0.105882, 1)
+sky_horizon_color = Color(0.65098, 0.533333, 0.356863, 1)
+sky_curve = 0.0194112
 sky_energy_multiplier = 0.5
 ground_bottom_color = Color(0, 0, 0, 1)
-ground_horizon_color = Color(0.462745, 0.364706, 0.211765, 1)
-ground_curve = 0.00999998
-ground_energy_multiplier = 0.5
+ground_horizon_color = Color(0.65098, 0.533333, 0.356863, 1)
 
-[sub_resource type="Sky" id="Sky_7lyec"]
-sky_material = SubResource("ProceduralSkyMaterial_rq7mv")
+[sub_resource type="Sky" id="Sky_jq5ce"]
+sky_material = SubResource("ProceduralSkyMaterial_i07vo")
 
-[sub_resource type="Environment" id="Environment_kio6l"]
+[sub_resource type="Environment" id="Environment_53mvk"]
 background_mode = 2
-sky = SubResource("Sky_7lyec")
-reflected_light_source = 2
-tonemap_mode = 2
-ssr_enabled = true
-ssao_enabled = true
+sky = SubResource("Sky_jq5ce")
 ssil_enabled = true
-sdfgi_use_occlusion = true
-sdfgi_read_sky_light = false
-glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i36aw"]
+resource_local_to_scene = true
+size = Vector2(1.5, 2.5)
 
 [sub_resource type="Gradient" id="Gradient_f4cp3"]
 
@@ -49,7 +46,37 @@ height = 128
 color_ramp = SubResource("Gradient_f4cp3")
 noise = SubResource("FastNoiseLite_td814")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bo5uc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3rhnx"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_qus8l")
+shader_parameter/x_panels = 7.0
+shader_parameter/y_panels = 9.0
+shader_parameter/texture_x_variations = 7.0
+shader_parameter/texture_y_variations = 4.0
+shader_parameter/wall_texture = ExtResource("4_olgws")
+shader_parameter/rand = SubResource("NoiseTexture2D_ma06n")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_d7mmv"]
+resource_local_to_scene = true
+size = Vector2(1.5, 2.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5268"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_qus8l")
+shader_parameter/x_panels = 7.0
+shader_parameter/y_panels = 9.0
+shader_parameter/texture_x_variations = 7.0
+shader_parameter/texture_y_variations = 4.0
+shader_parameter/wall_texture = ExtResource("4_olgws")
+shader_parameter/rand = SubResource("NoiseTexture2D_ma06n")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iakls"]
+resource_local_to_scene = true
+size = Vector2(1.5, 2.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6oeve"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("3_qus8l")
@@ -64,22 +91,276 @@ shader_parameter/rand = SubResource("NoiseTexture2D_ma06n")
 resource_local_to_scene = true
 size = Vector2(1.5, 2.5)
 
+[sub_resource type="Gradient" id="Gradient_bs18t"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ihoc0"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j0miv"]
+width = 128
+height = 128
+color_ramp = SubResource("Gradient_bs18t")
+noise = SubResource("FastNoiseLite_ihoc0")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bo5uc"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_qus8l")
+shader_parameter/x_panels = 7.0
+shader_parameter/y_panels = 9.0
+shader_parameter/texture_x_variations = 7.0
+shader_parameter/texture_y_variations = 4.0
+shader_parameter/wall_texture = ExtResource("4_olgws")
+shader_parameter/rand = SubResource("NoiseTexture2D_j0miv")
+
+[sub_resource type="Gradient" id="Gradient_3cg5w"]
+offsets = PackedFloat32Array(0.172185, 0.483444)
+colors = PackedColorArray(1, 1, 1, 0.462745, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jsliw"]
+gradient = SubResource("Gradient_3cg5w")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pp56s"]
+resource_local_to_scene = true
+size = Vector2(1.5, 2.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_85q88"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_qus8l")
+shader_parameter/x_panels = 7.0
+shader_parameter/y_panels = 9.0
+shader_parameter/texture_x_variations = 7.0
+shader_parameter/texture_y_variations = 4.0
+shader_parameter/wall_texture = ExtResource("4_olgws")
+shader_parameter/rand = SubResource("NoiseTexture2D_ma06n")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1fiaf"]
+resource_local_to_scene = true
+size = Vector2(1.5, 2.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ubc2d"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_qus8l")
+shader_parameter/x_panels = 7.0
+shader_parameter/y_panels = 9.0
+shader_parameter/texture_x_variations = 7.0
+shader_parameter/texture_y_variations = 4.0
+shader_parameter/wall_texture = ExtResource("4_olgws")
+shader_parameter/rand = SubResource("NoiseTexture2D_ma06n")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k4cel"]
+size = Vector3(114, 1, 54.2642)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p4xjt"]
+size = Vector3(114, 1, 54.2642)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_qylqq"]
+agent_max_climb = 0.5
+
 [node name="City" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_53mvk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 visible = false
 shadow_enabled = true
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_kio6l")
-
 [node name="Ambient" type="AudioStreamPlayer" parent="."]
 bus = &"Ambient"
 
 [node name="PlayerSpawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.9172, 0, 9.67571)
 script = ExtResource("1_ypmij")
+
+[node name="Buildings" type="Node3D" parent="."]
+
+[node name="2-End" parent="Buildings" instance=ExtResource("2_g03b1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 29.5, 0, 61)
+
+[node name="Greenovskaya2" type="Node3D" parent="Buildings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 45.5)
+
+[node name="9aSection" parent="Buildings/Greenovskaya2" instance=ExtResource("1_d653t")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -16)
+
+[node name="Number" parent="Buildings/Greenovskaya2/9aSection/Entrance" index="3"]
+text = "1"
+
+[node name="DvornikDoor" parent="Buildings/Greenovskaya2/9aSection/Entrance" index="9"]
+mesh = SubResource("PlaneMesh_i36aw")
+
+[node name="FrontWall" parent="Buildings/Greenovskaya2/9aSection" index="2"]
+material_overlay = SubResource("ShaderMaterial_3rhnx")
+
+[node name="9aSection2" parent="Buildings/Greenovskaya2" instance=ExtResource("1_d653t")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 5)
+
+[node name="Number" parent="Buildings/Greenovskaya2/9aSection2/Entrance" index="3"]
+text = "2"
+
+[node name="DvornikDoor" parent="Buildings/Greenovskaya2/9aSection2/Entrance" index="9"]
+mesh = SubResource("PlaneMesh_d7mmv")
+
+[node name="FrontWall" parent="Buildings/Greenovskaya2/9aSection2" index="2"]
+material_overlay = SubResource("ShaderMaterial_o5268")
+
+[node name="9aSide" parent="Buildings/Greenovskaya2" instance=ExtResource("5_fpyoq")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -26.5)
+
+[node name="9aSide2" parent="Buildings/Greenovskaya2" instance=ExtResource("5_fpyoq")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 15.5)
+
+[node name="1-2-L-connection" parent="Buildings" instance=ExtResource("6_gotas")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 0)
+
+[node name="Greenovskaya1" type="Node3D" parent="Buildings"]
+
+[node name="9aSection" parent="Buildings/Greenovskaya1" instance=ExtResource("1_d653t")]
+
+[node name="Number" parent="Buildings/Greenovskaya1/9aSection/Entrance" index="3"]
+text = "1"
+
+[node name="DvornikDoor" parent="Buildings/Greenovskaya1/9aSection/Entrance" index="9"]
+mesh = SubResource("PlaneMesh_iakls")
+
+[node name="FrontWall" parent="Buildings/Greenovskaya1/9aSection" index="2"]
+material_overlay = SubResource("ShaderMaterial_6oeve")
+
+[node name="9aSection2" parent="Buildings/Greenovskaya1" instance=ExtResource("1_d653t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0, 0)
+
+[node name="Number" parent="Buildings/Greenovskaya1/9aSection2/Entrance" index="3"]
+text = "2"
+
+[node name="DvornikDoor" parent="Buildings/Greenovskaya1/9aSection2/Entrance" index="9"]
+mesh = SubResource("PlaneMesh_nivo5")
+
+[node name="FrontWall" parent="Buildings/Greenovskaya1/9aSection2" index="2"]
+material_overlay = SubResource("ShaderMaterial_bo5uc")
+
+[node name="9aSection4" parent="Buildings/Greenovskaya1" instance=ExtResource("1_d653t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 0)
+
+[node name="LampTurnedOFf" parent="Buildings/Greenovskaya1/9aSection4/Entrance" index="0"]
+visible = false
+
+[node name="Lamp" parent="Buildings/Greenovskaya1/9aSection4/Entrance" index="1"]
+visible = true
+
+[node name="Number" parent="Buildings/Greenovskaya1/9aSection4/Entrance" index="3"]
+text = "3"
+
+[node name="MainDoor" parent="Buildings/Greenovskaya1/9aSection4/Entrance" index="4" node_paths=PackedStringArray("scene_from")]
+scene_from = NodePath("../../../../..")
+scene_to = "res://models/entrance_inner/entrance_inner1.tscn"
+save_spawnpoint = true
+save_spawnpoint_name = "InnerEntrance1"
+
+[node name="EntrancePanel" parent="Buildings/Greenovskaya1/9aSection4/Entrance/MainDoor" index="4"]
+code = "367"
+
+[node name="Spawnpoint" type="Node3D" parent="Buildings/Greenovskaya1/9aSection4/Entrance/MainDoor" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1.19171)
+
+[node name="DvornikDoor" parent="Buildings/Greenovskaya1/9aSection4/Entrance" index="9"]
+mesh = SubResource("PlaneMesh_nivo5")
+
+[node name="FrontWall" parent="Buildings/Greenovskaya1/9aSection4" index="2"]
+material_overlay = SubResource("ShaderMaterial_bo5uc")
+
+[node name="Decal" type="Decal" parent="Buildings/Greenovskaya1/9aSection4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85424, 1.62159, 6.17155)
+size = Vector3(0.1, 0.1, 0.1)
+texture_albedo = SubResource("GradientTexture2D_jsliw")
+
+[node name="Decal2" type="Decal" parent="Buildings/Greenovskaya1/9aSection4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85044, 1.49957, 6.17155)
+size = Vector3(0.1, 0.1, 0.1)
+texture_albedo = SubResource("GradientTexture2D_jsliw")
+
+[node name="Decal3" type="Decal" parent="Buildings/Greenovskaya1/9aSection4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.08192, 1.38606, 6.17155)
+size = Vector3(0.1, 0.1, 0.1)
+texture_albedo = SubResource("GradientTexture2D_jsliw")
+
+[node name="AlleyConnecion" parent="Buildings/Greenovskaya1" instance=ExtResource("6_ifkew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57, 0, 0)
+
+[node name="9aSection5" parent="Buildings/Greenovskaya1" instance=ExtResource("1_d653t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72, 0, 0)
+
+[node name="Number" parent="Buildings/Greenovskaya1/9aSection5/Entrance" index="3"]
+text = "4"
+
+[node name="DvornikDoor" parent="Buildings/Greenovskaya1/9aSection5/Entrance" index="9"]
+mesh = SubResource("PlaneMesh_nivo5")
+
+[node name="FrontWall" parent="Buildings/Greenovskaya1/9aSection5" index="2"]
+material_overlay = SubResource("ShaderMaterial_bo5uc")
+
+[node name="9aSection6" parent="Buildings/Greenovskaya1" instance=ExtResource("1_d653t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93, 0, 0)
+
+[node name="Number" parent="Buildings/Greenovskaya1/9aSection6/Entrance" index="3"]
+text = "5"
+
+[node name="DvornikDoor" parent="Buildings/Greenovskaya1/9aSection6/Entrance" index="9"]
+mesh = SubResource("PlaneMesh_nivo5")
+
+[node name="FrontWall" parent="Buildings/Greenovskaya1/9aSection6" index="2"]
+material_overlay = SubResource("ShaderMaterial_bo5uc")
+
+[node name="9aSide" parent="Buildings/Greenovskaya1" instance=ExtResource("5_fpyoq")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.5, 0, 0)
+
+[node name="9aSide2" parent="Buildings/Greenovskaya1" instance=ExtResource("5_fpyoq")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -103.5, 0, 0)
+
+[node name="1-3-L-connection2" parent="Buildings" instance=ExtResource("6_gotas")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -122.5, 0, 0)
+
+[node name="Greenovskaya3" type="Node3D" parent="Buildings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -122.5, 0, 45.5)
+
+[node name="9aSection" parent="Buildings/Greenovskaya3" instance=ExtResource("1_d653t")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -16)
+
+[node name="Number" parent="Buildings/Greenovskaya3/9aSection/Entrance" index="3"]
+text = "1"
+
+[node name="DvornikDoor" parent="Buildings/Greenovskaya3/9aSection/Entrance" index="9"]
+mesh = SubResource("PlaneMesh_pp56s")
+
+[node name="FrontWall" parent="Buildings/Greenovskaya3/9aSection" index="2"]
+material_overlay = SubResource("ShaderMaterial_85q88")
+
+[node name="9aSection2" parent="Buildings/Greenovskaya3" instance=ExtResource("1_d653t")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 5)
+
+[node name="Number" parent="Buildings/Greenovskaya3/9aSection2/Entrance" index="3"]
+text = "2"
+
+[node name="DvornikDoor" parent="Buildings/Greenovskaya3/9aSection2/Entrance" index="9"]
+mesh = SubResource("PlaneMesh_1fiaf")
+
+[node name="FrontWall" parent="Buildings/Greenovskaya3/9aSection2" index="2"]
+material_overlay = SubResource("ShaderMaterial_ubc2d")
+
+[node name="9aSide" parent="Buildings/Greenovskaya3" instance=ExtResource("5_fpyoq")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -26.5)
+
+[node name="9aSide2" parent="Buildings/Greenovskaya3" instance=ExtResource("5_fpyoq")]
+transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 15.5)
+
+[node name="3-End" parent="Buildings" instance=ExtResource("2_g03b1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -122.5, 0, 61)
 
 [node name="Border" type="Node3D" parent="."]
 
@@ -87,16 +368,16 @@ script = ExtResource("1_ypmij")
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 34, 0, -20)
 
 [node name="ForestBorderSection6" parent="Border" instance=ExtResource("2_dkbjw")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 49.5, 0, -4)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 49.5, 0, -16)
 
 [node name="ForestBorderSection7" parent="Border" instance=ExtResource("2_dkbjw")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 49.5, 0, 26)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 49.5, 0, 14)
 
 [node name="ForestBorderSection8" parent="Border" instance=ExtResource("2_dkbjw")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 49.5, 0, 56)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 49.5, 0, 44)
 
 [node name="ForestBorderSection9" parent="Border" instance=ExtResource("2_dkbjw")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 49.5, 0, 86)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 49.5, 0, 74)
 
 [node name="ForestBorderSection2" parent="Border" instance=ExtResource("2_dkbjw")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, -20)
@@ -110,71 +391,57 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -56, 0
 [node name="ForestBorderSection5" parent="Border" instance=ExtResource("2_dkbjw")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -85, 0, -20)
 
-[node name="Buildings" type="Node3D" parent="."]
+[node name="ForestBorderSection10" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -115, 0, -20)
 
-[node name="Building1" type="Node3D" parent="Buildings"]
+[node name="ForestBorderSection11" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -145, 0, -20)
 
-[node name="9aSection" parent="Buildings/Building1" instance=ExtResource("1_d653t")]
+[node name="ForestBorderSection12" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -142.386, 0, -15.3105)
 
-[node name="9aSection2" parent="Buildings/Building1" instance=ExtResource("1_d653t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 0, 0)
+[node name="ForestBorderSection13" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -142.386, 0, 14.6895)
 
-[node name="FrontWall" parent="Buildings/Building1/9aSection2" index="1"]
-material_overlay = SubResource("ShaderMaterial_bo5uc")
+[node name="ForestBorderSection14" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -142.386, 0, 44.6895)
 
-[node name="DvornikDoor" parent="Buildings/Building1/9aSection2/Entrance" index="4"]
-mesh = SubResource("PlaneMesh_nivo5")
+[node name="ForestBorderSection15" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -142.386, 0, 74.6895)
 
-[node name="9aSection3" parent="Buildings/Building1" instance=ExtResource("1_d653t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, 0)
+[node name="ForestBorderSection16" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -128.5, 0, 74)
 
-[node name="FrontWall" parent="Buildings/Building1/9aSection3" index="1"]
-material_overlay = SubResource("ShaderMaterial_bo5uc")
+[node name="ForestBorderSection17" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -98.5, 0, 74)
 
-[node name="DvornikDoor" parent="Buildings/Building1/9aSection3/Entrance" index="4"]
-mesh = SubResource("PlaneMesh_nivo5")
+[node name="ForestBorderSection18" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -69.5, 0, 74)
 
-[node name="9aSection4" parent="Buildings/Building1" instance=ExtResource("1_d653t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -63, 0, 0)
+[node name="ForestBorderSection19" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -39.5, 0, 74)
 
-[node name="FrontWall" parent="Buildings/Building1/9aSection4" index="1"]
-material_overlay = SubResource("ShaderMaterial_bo5uc")
+[node name="ForestBorderSection20" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.5, 0, 74)
 
-[node name="DvornikDoor" parent="Buildings/Building1/9aSection4/Entrance" index="4"]
-mesh = SubResource("PlaneMesh_nivo5")
+[node name="ForestBorderSection21" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 20.5, 0, 74)
 
-[node name="AlleyConnecion" parent="Buildings/Building1" instance=ExtResource("6_ifkew")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78, 0, 0)
+[node name="ForestBorderSection22" parent="Border" instance=ExtResource("2_dkbjw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 47.5, 0, 74)
 
-[node name="9aSection5" parent="Buildings/Building1" instance=ExtResource("1_d653t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93, 0, 0)
+[node name="Dvor" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, 48)
 
-[node name="FrontWall" parent="Buildings/Building1/9aSection5" index="1"]
-material_overlay = SubResource("ShaderMaterial_bo5uc")
+[node name="Snow" type="StaticBody3D" parent="Dvor"]
 
-[node name="DvornikDoor" parent="Buildings/Building1/9aSection5/Entrance" index="4"]
-mesh = SubResource("PlaneMesh_nivo5")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Dvor/Snow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.5, -1.91458)
+shape = SubResource("BoxShape3D_k4cel")
 
-[node name="9aSide" parent="Buildings/Building1" instance=ExtResource("5_fpyoq")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10.5, 0, 0)
-
-[node name="Building2" type="Node3D" parent="Buildings"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 45.5)
-
-[node name="9aSection" parent="Buildings/Building2" instance=ExtResource("1_d653t")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -16)
-
-[node name="9aSection2" parent="Buildings/Building2" instance=ExtResource("1_d653t")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 5)
-
-[node name="9aSide" parent="Buildings/Building2" instance=ExtResource("5_fpyoq")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -26.5)
-
-[node name="9aSide2" parent="Buildings/Building2" instance=ExtResource("5_fpyoq")]
-transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 0, 0, 15.5)
-
-[node name="1-2-L-connection" parent="Buildings" instance=ExtResource("6_gotas")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.5, 0, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Dvor/Snow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.5, -1.91458)
+mesh = SubResource("BoxMesh_p4xjt")
 
 [node name="DeliveryBasementEntrance" parent="." node_paths=PackedStringArray("scene_from") instance=ExtResource("4_bmw10")]
 transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 10.316, 0.0422816, -4.42632)
@@ -189,7 +456,7 @@ save_spawnpoint_name = "2"
 locked = false
 
 [node name="DeliveryBasementEntrance3" parent="." node_paths=PackedStringArray("scene_from") instance=ExtResource("4_bmw10")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -29.684, 0.0422816, 5.57368)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -37.4799, 0.0422816, 5.57368)
 scene_from = NodePath("..")
 save_spawnpoint_name = "3"
 locked = false
@@ -209,7 +476,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.37383, -0.286148, -12.955)
 [node name="DeadTreeB" parent="." instance=ExtResource("12_wxcfl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0414, 0, 29.5772)
 
-[editable path="Buildings/Building1/9aSection2"]
-[editable path="Buildings/Building1/9aSection3"]
-[editable path="Buildings/Building1/9aSection4"]
-[editable path="Buildings/Building1/9aSection5"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_qylqq")
+
+[node name="MentSpawner" type="Node3D" parent="."]
+script = ExtResource("14_g0w71")
+fill_count = 1
+
+[node name="Node3D2" type="Node3D" parent="MentSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4055, -0.3, 15.968)
+
+[node name="Node3D" type="Node3D" parent="MentSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.4263, -0.3, -15.8018)
+
+[editable path="Buildings/Greenovskaya2/9aSection"]
+[editable path="Buildings/Greenovskaya2/9aSection2"]
+[editable path="Buildings/Greenovskaya1/9aSection"]
+[editable path="Buildings/Greenovskaya1/9aSection2"]
+[editable path="Buildings/Greenovskaya1/9aSection4"]
+[editable path="Buildings/Greenovskaya1/9aSection5"]
+[editable path="Buildings/Greenovskaya1/9aSection6"]
+[editable path="Buildings/Greenovskaya3/9aSection"]
+[editable path="Buildings/Greenovskaya3/9aSection2"]

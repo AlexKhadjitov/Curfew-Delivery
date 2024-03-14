@@ -1,0 +1,172 @@
+[gd_scene load_steps=19 format=3 uid="uid://0jit51b47olq"]
+
+[ext_resource type="Material" uid="uid://dbcsevfu8wklr" path="res://materials/snow.tres" id="1_420kq"]
+[ext_resource type="Material" uid="uid://cfgo14n0x0i6g" path="res://materials/road.tres" id="1_knmom"]
+[ext_resource type="Texture2D" uid="uid://8x8rtkw1iso8" path="res://textures/bordur.png" id="1_l1nwa"]
+
+[sub_resource type="Gradient" id="Gradient_7uptj"]
+offsets = PackedFloat32Array(0, 0.259124, 1)
+colors = PackedColorArray(0.14, 0.13216, 0.1204, 1, 0, 0, 0, 0.721569, 0.41, 0.3198, 0.246, 0.521569)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n1hq6"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xxkvg"]
+width = 256
+height = 256
+seamless = true
+color_ramp = SubResource("Gradient_7uptj")
+noise = SubResource("FastNoiseLite_n1hq6")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkv2t"]
+transparency = 1
+albedo_texture = SubResource("NoiseTexture2D_xxkvg")
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w32me"]
+next_pass = SubResource("StandardMaterial3D_gkv2t")
+albedo_texture = ExtResource("1_l1nwa")
+uv1_scale = Vector3(0.44, 1, 1)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_s41p8"]
+size = Vector3(6, 0.4, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d6gv4"]
+size = Vector3(6, 0.4, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xne2g"]
+size = Vector3(14, 0.4, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4vd4o"]
+size = Vector3(26, 0.4, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xo48i"]
+size = Vector3(22, 0.25, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ugcod"]
+size = Vector3(26, 1, 26)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2gnxf"]
+material = ExtResource("1_knmom")
+size = Vector3(26, 0.5, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0cmgi"]
+size = Vector3(26, 0.5, 6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sm5kd"]
+material = ExtResource("1_knmom")
+size = Vector3(38, 0.5, 12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jkr46"]
+size = Vector3(38, 0.5, 12)
+
+[node name="End" type="Node3D"]
+
+[node name="Bordurs" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 2, -0.6, -1.06581e-14)
+
+[node name="Bordur" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, 0.41, -10)
+material_override = SubResource("StandardMaterial3D_w32me")
+mesh = SubResource("BoxMesh_s41p8")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur2" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0.41, -13)
+material_override = SubResource("StandardMaterial3D_w32me")
+mesh = SubResource("BoxMesh_d6gv4")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur6" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0.41, -16)
+material_override = SubResource("StandardMaterial3D_w32me")
+mesh = SubResource("BoxMesh_s41p8")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur7" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7, 0.41, -19)
+material_override = SubResource("StandardMaterial3D_w32me")
+mesh = SubResource("BoxMesh_d6gv4")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur8" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0.41, -19)
+material_override = SubResource("StandardMaterial3D_w32me")
+mesh = SubResource("BoxMesh_d6gv4")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur3" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.00001, 0.41, 13)
+material_override = SubResource("StandardMaterial3D_w32me")
+mesh = SubResource("BoxMesh_s41p8")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur4" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -4, 0.41, 9.99999)
+material_override = SubResource("StandardMaterial3D_w32me")
+mesh = SubResource("BoxMesh_d6gv4")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur9" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.00001, 0.41, 19)
+material_override = SubResource("StandardMaterial3D_w32me")
+mesh = SubResource("BoxMesh_s41p8")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur11" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.00001, 0.41, 19)
+material_override = SubResource("StandardMaterial3D_w32me")
+mesh = SubResource("BoxMesh_s41p8")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur10" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -10, 0.41, 16)
+material_override = SubResource("StandardMaterial3D_w32me")
+mesh = SubResource("BoxMesh_d6gv4")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur5" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -4, 0.41, -6.07174e-06)
+material_override = SubResource("StandardMaterial3D_w32me")
+mesh = SubResource("BoxMesh_xne2g")
+skeleton = NodePath("../../Ground")
+
+[node name="Bordur12" type="MeshInstance3D" parent="Bordurs"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -10, 0.41, -6.59627e-06)
+material_override = SubResource("StandardMaterial3D_w32me")
+mesh = SubResource("BoxMesh_4vd4o")
+skeleton = NodePath("../../Ground")
+
+[node name="Snow" type="StaticBody3D" parent="." groups=["Snow"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Snow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.37114e-08, 0, -1)
+material_override = ExtResource("1_420kq")
+mesh = SubResource("BoxMesh_xo48i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Snow"]
+shape = SubResource("BoxShape3D_ugcod")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, -0.25, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_2gnxf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_0cmgi")
+
+[node name="Road" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, -0.6, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.37114e-08, 0, 1)
+mesh = SubResource("BoxMesh_sm5kd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.37114e-08, 0, 1)
+shape = SubResource("BoxShape3D_jkr46")

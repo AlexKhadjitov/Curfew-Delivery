@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bsloijfg5dkir"
-path="res://.godot/imported/GravityBold8.ttf-6d5c816d31a1486d63c140d44d186501.fontdata"
+uid="uid://c8okgajwvv38m"
+path="res://.godot/imported/SegmentedTauri17.ttf-0acda06f41ed59e75817b7998f3b0383.fontdata"
 
 [deps]
 
-source_file="res://fons/GravityBold8.ttf"
-dest_files=["res://.godot/imported/GravityBold8.ttf-6d5c816d31a1486d63c140d44d186501.fontdata"]
+source_file="res://fonts/SegmentedTauri17.ttf"
+dest_files=["res://.godot/imported/SegmentedTauri17.ttf-0acda06f41ed59e75817b7998f3b0383.fontdata"]
 
 [params]
 

@@ -156,7 +156,7 @@ environment = SubResource("Environment_bxgc7")
 [node name="Ambient" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38066, 1.09174, 2.19933)
 stream = ExtResource("1_mju1g")
-volume_db = -8.648
+volume_db = -18.843
 autoplay = true
 
 [node name="PlayerSpawner" type="Node3D" parent="."]
@@ -381,6 +381,8 @@ script = ExtResource("10_rwf3u")
 intro_dialouge = Array[String](["Hello there!", "I know, i didn't explain job details on the phone, so I'll explain them now.", "I'm an acquaintance of head of city's delivery system.
 When city authorities announced emergency regime, they obviously ordered delivery system to stop. But emergency regime already lasts too long, so people are getting hungry.", "And that's the moment, when we step onto the scene!", "The job is simple - i tell you addres of client, you take order to client, take money and give them their order.
 For now orders will be mostly food, but it is not the only thing people order.", "OH, by the way, police were pretty serious about this, so they set up robots to patrol streets, so be wary"])
+first_quest_dialouge = Array[String](["Are you ready for your first task? Are you excited?
+Good.", "So, the client is on Greenovskaya 2, entrance 3, flat 4"])
 
 [node name="EmployerEyes" type="Sprite3D" parent="Employer" node_paths=PackedStringArray("speaking_area")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0.5)

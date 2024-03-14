@@ -15,20 +15,20 @@ size = Vector3(26, 1, 26)
 [sub_resource type="BoxShape3D" id="BoxShape3D_2p7wy"]
 size = Vector3(26, 1, 26)
 
-[sub_resource type="Gradient" id="Gradient_7uptj"]
+[sub_resource type="Gradient" id="Gradient_mdnl0"]
 offsets = PackedFloat32Array(0, 0.259124, 1)
 colors = PackedColorArray(0.14, 0.13216, 0.1204, 1, 0, 0, 0, 0.721569, 0.41, 0.3198, 0.246, 0.521569)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_n1hq6"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vja7s"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rymar"]
 width = 256
 height = 256
 seamless = true
-color_ramp = SubResource("Gradient_7uptj")
-noise = SubResource("FastNoiseLite_n1hq6")
+color_ramp = SubResource("Gradient_mdnl0")
+noise = SubResource("FastNoiseLite_vja7s")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkv2t"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5r4fh"]
 transparency = 1
 albedo_texture = SubResource("NoiseTexture2D_rymar")
 uv1_triplanar = true
@@ -36,7 +36,7 @@ uv1_world_triplanar = true
 texture_filter = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnn08"]
-next_pass = SubResource("StandardMaterial3D_gkv2t")
+next_pass = SubResource("StandardMaterial3D_5r4fh")
 albedo_texture = ExtResource("2_5c65d")
 uv1_scale = Vector3(0.44, 1, 1)
 uv1_triplanar = true

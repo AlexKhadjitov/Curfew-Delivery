@@ -1,7 +1,7 @@
 extends Control
 class_name DialougeWindow
 
-var dialouge: Array[String]
+var dialouge: Array
 var dialouge_id: String
 var symbol_speed: float
 

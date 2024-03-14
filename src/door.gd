@@ -17,6 +17,8 @@ class_name Door
 
 @export var locked = false
 
+signal on_interact()
+
 func _ready():
 	if save_spawnpoint and has_node("Spawnpoint"):
 		var spwn = get_node("Spawnpoint")
@@ -24,6 +26,10 @@ func _ready():
 		spwn.add_to_group("Spawnpoints")
 
 func interact():
+	on_interact.emit()
+	print("a")
+	if locked and sound_player == null:
+		return
 	if locked:
 		sound_player.stream = open_locked_sound
 		sound_player.play()

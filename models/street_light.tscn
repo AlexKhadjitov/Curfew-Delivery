@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://slbvbt4tbob5"]
+
+[ext_resource type="Texture2D" uid="uid://n5h80vi3ohp8" path="res://textures/SBS - Tiny Texture Pack 2 - 128x128/128x128/Elements/Elements_08-128x128.png" id="1_jdaqs"]
+[ext_resource type="Texture2D" uid="uid://dcma3m5jkst08" path="res://textures/SBS - Tiny Texture Pack 3 - Small/128x128/Metal/Metal_01-128x128.png" id="2_87ege"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ewyl4"]
+albedo_texture = ExtResource("1_jdaqs")
+emission_enabled = true
+emission = Color(1, 0.796078, 0.529412, 1)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_lxnlo"]
+material = SubResource("StandardMaterial3D_ewyl4")
+size = Vector3(0.2, 0.1, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etm7v"]
+albedo_texture = ExtResource("2_87ege")
+metallic = 1.0
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fd0xw"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 6.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_iglfg"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_opref"]
+height = 1.0
+radius = 0.15
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lrof7"]
+height = 6.0
+radius = 0.15
+
+[node name="StreetLight" type="StaticBody3D"]
+
+[node name="LampOff" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.7, -0.5)
+mesh = SubResource("BoxMesh_lxnlo")
+
+[node name="LampOn" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.7, -0.5)
+mesh = SubResource("BoxMesh_lxnlo")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="LampOn"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_color = Color(1, 0.796078, 0.529412, 1)
+light_energy = 10.0
+light_bake_mode = 1
+shadow_enabled = true
+distance_fade_enabled = true
+spot_range = 10.0
+spot_angle = 62.09
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+material_override = SubResource("StandardMaterial3D_etm7v")
+mesh = SubResource("CylinderMesh_fd0xw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 5.85, -0.5)
+material_override = SubResource("StandardMaterial3D_etm7v")
+mesh = SubResource("CylinderMesh_iglfg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.85, -0.5)
+shape = SubResource("CylinderShape3D_opref")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("CylinderShape3D_lrof7")

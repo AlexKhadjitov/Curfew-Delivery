@@ -13,7 +13,7 @@ func get_dialouge(dialouge_id) -> DialougeWindow:
 			return child
 	return null
 
-func start_dialouge(dialouge: Array[String], dialouge_id = "", on_play_voice = null, symbol_speed = 0.05):
+func start_dialouge(dialouge: Array, dialouge_id = "", on_play_voice = null, symbol_speed = 0.05):
 	if get_dialouge(dialouge_id) != null:
 		return
 
