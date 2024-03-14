@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cuhwca406f2ns"]
+[gd_scene load_steps=41 format=3 uid="uid://cuhwca406f2ns"]
 
 [ext_resource type="PackedScene" uid="uid://blhsdt7p77ph7" path="res://models/buildings/panel_buildings/9a_section.tscn" id="1_d653t"]
 [ext_resource type="Script" path="res://src/player_spawner.gd" id="1_ypmij"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cw05jkfj15rf" path="res://models/props/soccer_ball.tscn" id="10_fgw6v"]
 [ext_resource type="PackedScene" uid="uid://2pthcq51ouxk" path="res://models/trees/ready/dead_tree_a.tscn" id="11_onuf6"]
 [ext_resource type="PackedScene" uid="uid://c0t44cm7iwyow" path="res://models/trees/ready/dead_tree_b.tscn" id="12_wxcfl"]
-[ext_resource type="Script" path="res://src/ment/ment_spawner.gd" id="14_g0w71"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i07vo"]
 sky_top_color = Color(0.054902, 0.0784314, 0.105882, 1)
@@ -478,16 +477,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0414, 0, 29.5772)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_qylqq")
-
-[node name="MentSpawner" type="Node3D" parent="."]
-script = ExtResource("14_g0w71")
-fill_count = 1
-
-[node name="Node3D2" type="Node3D" parent="MentSpawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.4055, -0.3, 15.968)
-
-[node name="Node3D" type="Node3D" parent="MentSpawner"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.4263, -0.3, -15.8018)
 
 [editable path="Buildings/Greenovskaya2/9aSection"]
 [editable path="Buildings/Greenovskaya2/9aSection2"]

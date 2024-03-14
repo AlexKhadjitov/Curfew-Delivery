@@ -2,6 +2,9 @@
 .godot/
 exports/
 export_presets.cfg
-textures/
+SBS - Tiny Texture Pack - 128x128/
+SBS - Tiny Texture Pack 2 - 128x128/
+SBS - Tiny Texture Pack 3 - Small/
 *.rar
 *.zip
+builds/
